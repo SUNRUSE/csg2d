@@ -1,0 +1,73 @@
+{
+    "title": "OpenShred Map",
+    "type": "object",
+    "definitions": {
+        "point": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "y": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            },
+            "required": ["x", "y"]
+        }
+    },
+    "properties": {
+        "spawn": {
+            "$ref": "#/definitions/point"
+        },
+        "shapes": {
+            "type": "array",
+            "minItems": 1,
+            "items": { 
+                "type": "object",
+                "properties": {
+                    "operator": {
+                        "enum": ["add", "subtract"]
+                    },
+                    "shape": {
+                        "oneOf": [{
+                            "properties": {
+                                "origin": {
+                                    "$ref": "#/definitions/point"
+                                },
+                                "radius": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            },
+                            "required": ["origin", "radius"]
+                        }, {
+                            "properties": {
+                                "left": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "top": {
+                                    "type": "integer",
+                                    "minimum": 0
+                                },
+                                "width": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                },
+                                "height": {
+                                    "type": "integer",
+                                    "minimum": 1
+                                }
+                            },
+                            "required": ["left", "top", "width", "height"]
+                        }]
+                    }
+                },
+                "required": ["operator", "shape"]
+            }
+        }
+    },
+    "required": ["spawn", "shapes"]
+}

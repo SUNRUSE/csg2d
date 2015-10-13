@@ -1,0 +1,109 @@
+.handle {
+	width: 1.5rem;
+	height: 1.5rem;
+	background: blue;
+	left: 50%;
+	top: 50%;
+	margin-left: -0.75rem;
+	margin-top: -0.75rem;
+	position: absolute;
+	z-index: 2;
+	display: none;
+	opacity: 0.4;
+	line-height: 1.5rem;
+	text-align: center;
+	touch-action: none;
+	cursor: pointer;
+}
+
+.handle[kind="move"] {
+	display: block;
+}
+
+.shape:focus .handle {
+	display: block;
+	opacity: 1.0;
+}
+
+.handle[kind="left"], .handle[kind="radiusLeft"] {
+	left: 0;
+}
+
+.handle[kind="right"], .handle[kind="radiusRight"] {
+	left: 100%;
+}
+
+.handle[kind="top"], .handle[kind="radiusTop"] {
+	top: 0;
+}
+
+.handle[kind="bottom"], .handle[kind="radiusBottom"] {
+	top: 100%;
+}
+
+.handle[kind="delete"] {
+	top: 25%;
+	left: 25%;
+}
+
+.handle[kind="clone"] {
+	left: 75%;
+	top: 25%;
+}
+
+.handle[kind="operator"] {
+	left: 75%;
+	top: 75%;
+}
+
+.handle::after, .handle::before {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.handle[kind="move"]:after {
+	content: "\2722";
+}
+
+.handle[kind="left"]::after, .handle[kind="right"]::after {
+	content: "\2194";
+}
+
+.handle[kind="bottom"]::after, .handle[kind="top"]::after {
+	content: "\2195";
+}
+
+.handle[kind="operator"]::after {
+	content: "\262F";
+}
+
+.handle[kind="delete"]::after {
+	content: "\2421";
+}
+
+.handle[kind="clone"]::after {
+	content: "\2442";
+}
+
+.handle[kind="radiusLeft"]::after, .handle[kind="radiusRight"]::after, .handle[kind="radiusTop"]::after, .handle[kind="radiusBottom"]::after {
+	content: "\25CE";
+}
+
+.handle[kind="pushBack"] {
+	top: 75%;
+}
+
+.handle[kind="pushBack"]::after {
+	content: "\2397";
+}
+
+.handle[kind="pullForward"] {
+	top: 25%;
+}
+
+.handle[kind="pullForward"]::after {
+	content: "\2398";
+}

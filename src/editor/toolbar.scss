@@ -1,0 +1,58 @@
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	button {
+		width: 2rem;
+		height: 2rem;
+		background: orange;
+		border-right: 0.125rem solid darkorange;
+		font-size: 1.5rem;
+		line-height: 1.5rem;
+		text-align: center;
+		touch-action: none;
+		cursor: pointer;
+	}
+	
+	button:disabled {
+		background: darkgoldenrod;
+		cursor: default;
+	}
+	
+	button[class="add"][shape="rectangle"][operator="add"]::before {
+		content: "\2B1B";
+	}
+	
+	button[class="add"][shape="rectangle"][operator="subtract"]::before {
+		content: "\2B1C";
+	}
+	
+	button[class="add"][shape="circle"][operator="add"]::before {
+		content: "\25CF";
+	}
+	
+	button[class="add"][shape="circle"][operator="subtract"]::before {
+		content: "\25CB";
+	}
+	
+	button[id="undo"]::before {
+		content: "\21BA";
+	}
+	
+	button[id="redo"]::before {
+		content: "\21BB";
+	}
+	
+	button[id="clone"]::before {
+		content: "\2442";
+	}
+	
+	button[id="delete"]::before {
+		content: "\2421";
+	}
+	
+	button[id="operator"]::before {
+		content: "\262F";
+	}
+}

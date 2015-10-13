@@ -1,0 +1,24 @@
+html
+	head
+		script(src="min.js")
+		link(rel="stylesheet", type="text/css", href="min.css")
+		meta(name="viewport", content="width=240, initial-scale=1")
+		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+	body
+		div(id="viewport")
+		nav
+			button(class="add", operator="add", shape="rectangle")
+			button(class="add", operator="subtract", shape="rectangle")
+			button(class="add", operator="add", shape="circle")
+			button(class="add", operator="subtract", shape="circle")
+			button(id="undo", disabled="disabled")
+			button(id="redo", disabled="disabled")
+			//
+				These currently aren't implemented, but could be eventually for
+				mobile where we don't have enough screen space to clutter the
+				viewport with them in the shapes themselves.
+				button(id="clone")
+				button(id="delete")
+				button(id="operator")
+				button(id="pullForward")
+				button(id="pushBack")
