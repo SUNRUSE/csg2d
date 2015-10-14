@@ -5,3 +5,4 @@ build
 deploy
 node_modules
 serve.coffee
+npm-debug.log
