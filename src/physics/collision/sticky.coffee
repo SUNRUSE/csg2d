@@ -22,7 +22,7 @@ module.exports = (distance, aX, aY, bX, bY) ->
         dist = distance posX, posY
         travelled += dist
         if travelled > len then return null
-        if dist < 0.1 then return unused = 
+        if dist < 0.01 then return unused = 
             x: posX
             y: posY
         posX += normX * dist

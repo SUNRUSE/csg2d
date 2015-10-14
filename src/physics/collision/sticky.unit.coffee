@@ -14,26 +14,26 @@ describe "sticky", ->
     describe "when the line hits a subtractive circle", ->
         it "returns the point of intersection", ->
             result = sticky distanceField, 241, 267, 236, 252
-            expect(result.x).toBeCloseTo 236.3, 0.1
-            expect(result.y).toBeCloseTo 253, 0.1
+            expect(result.x).toBeCloseTo 236.3, 0.7
+            expect(result.y).toBeCloseTo 253, 0.7
         
     describe "when the line hits an additive circle", ->
         it "returns the point of intersection", ->
             result = sticky distanceField, 246, 266, 250, 258
-            expect(result.x).toBeCloseTo 249.8, 0.1
-            expect(result.y).toBeCloseTo 258.3, 0.1
+            expect(result.x).toBeCloseTo 249.8, 0.7
+            expect(result.y).toBeCloseTo 258.3, 0.7
             
     describe "when the line hits an additive square", ->
         it "returns the point of intersection", ->
             result = sticky distanceField, 246, 261, 242, 257
-            expect(result.x).toBeCloseTo 243, 0.1
-            expect(result.y).toBeCloseTo 258, 0.1
+            expect(result.x).toBeCloseTo 243, 0.7
+            expect(result.y).toBeCloseTo 258, 0.7
             
     describe "when the line hits a subtractive square", ->
         it "returns the point of intersection", ->
             result = sticky distanceField, 257, 260, 250, 246
-            expect(result.x).toBeCloseTo 251, 0.1
-            expect(result.y).toBeCloseTo 248, 0.1
+            expect(result.x).toBeCloseTo 251, 0.7
+            expect(result.y).toBeCloseTo 248, 0.7
             
     describe "when the line falls short of hitting a subtractive circle", ->
         it "returns null", ->
