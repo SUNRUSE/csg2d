@@ -1,4 +1,4 @@
-fdescribe "sticky", ->
+describe "sticky", ->
     sticky = require "./sticky"
     mapToDistanceField = require "./../distanceFields/mapToDistanceField"
     distanceField = mapToDistanceField require "./testMap.json"

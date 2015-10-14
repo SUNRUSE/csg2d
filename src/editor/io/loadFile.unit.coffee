@@ -79,7 +79,7 @@ describe "loadFile", ->
                         expect(fileReader.calls.count()).toEqual 1
                     it "does not begin reading another file", ->
                         expect(fileReaderInstance.readAsText.calls.count()).toEqual 1
-                    fit "passes the deserialized JSON to mapToElements", ->
+                    it "passes the deserialized JSON to mapToElements", ->
                         expect(mapToElements.calls.count()).toEqual 1
                         expect(mapToElements).toHaveBeenCalledWith [4, 5, 6]
                     it "does not show an alert", ->
