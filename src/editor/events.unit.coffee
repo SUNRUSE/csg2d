@@ -18,6 +18,8 @@ describe "events", ->
 		it "pullForward", -> expect(events.__get__ "pullForward").toBe require "./actions/pullForward"
 		it "pushBack", -> expect(events.__get__ "pushBack").toBe require "./actions/pushBack"
 		it "operator", -> expect(events.__get__ "operator").toBe require "./actions/operator"
+		it "elementsToMap", -> expect(events.__get__ "elementsToMap").toBe require "./dom/elementsToMap"
+		it "saveFile", -> expect(events.__get__ "saveFile").toBe require "./io/saveFile"
 		
 	describe "on calling", ->
 		history = dependencies = undefined
@@ -45,6 +47,8 @@ describe "events", ->
 				"pullForward"
 				"pushBack"
 				"operator"
+				"elementsToMap"
+				"saveFile"
 			]
 		
 		doesNothingAfterClick = ->
@@ -246,6 +250,16 @@ describe "events", ->
 						it "creates one new shape based on the attributes set", ->
 							expect(dependencies.addShape.calls.count()).toEqual 1
 							expect(dependencies.addShape).toHaveBeenCalledWith "test shape", "test operator"
+						doesNothingAfterClick()
+					describe "when the target element's id is \"save\"", ->
+						beforeEach -> 
+							id = "save"
+							dependencies.elementsToMap.and.returnValue "test map"
+							dependencies.saveFile.and.stub()
+							go()
+						it "saves the map JSON to a file", ->
+							expect(dependencies.saveFile.calls.count()).toEqual 1
+							expect(dependencies.saveFile).toHaveBeenCalledWith "map.json", "test map"
 						doesNothingAfterClick()
 			
 		describe "start", ->
@@ -477,5 +491,10 @@ describe "events", ->
 							className = "add"
 							attributes.shape = "test shape"
 							attributes.operator = "test operator"
+							go()
+						doesNothing()
+					describe "when the target element's id is \"save\"", ->
+						beforeEach -> 
+							className = "save"
 							go()
 						doesNothing()

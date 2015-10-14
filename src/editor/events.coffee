@@ -14,6 +14,9 @@ left = require "./actions/bounds/left"
 right = require "./actions/bounds/right"
 radius = require "./actions/bounds/radius"
 
+elementsToMap = require "./dom/elementsToMap"
+saveFile = require "./io/saveFile"
+
 currentAction = null
 
 # An object exposing three methods:
@@ -37,6 +40,7 @@ module.exports =
 					switch element.id
 						when "undo" then history.undo()
 						when "redo" then history.redo()
+						when "save" then saveFile "map.json", elementsToMap()
 						else switch element.className
 							when "add" then addShape (element.getAttribute "shape"), (element.getAttribute "operator")
 	start: (element) -> 

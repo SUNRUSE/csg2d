@@ -3,7 +3,7 @@ nav {
 	top: 0;
 	left: 0;
 	
-	button {
+	button, label {
 		width: 2rem;
 		height: 2rem;
 		background: orange;
@@ -54,5 +54,9 @@ nav {
 	
 	button[id="operator"]::before {
 		content: "\262F";
+	}
+	
+	button[id="save"]::before {
+		content: "\21E9";
 	}
 }
