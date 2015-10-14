@@ -1,17 +1,17 @@
-describe "addShapeElement", ->
+describe "addElement", ->
 	rewire = require "rewire"
-	addShapeElement = undefined
+	addElement = undefined
 	beforeEach ->
-		addShapeElement = rewire "./addShapeElement"
+		addElement = rewire "./addElement"
 		
 	describe "imports", ->
-		it "history", -> expect(addShapeElement.__get__ "history").toBe require "./history"
+		it "history", -> expect(addElement.__get__ "history").toBe require "./history"
 	
 	describe "on calling", ->
 		document = history = visible = undefined
 		beforeEach ->
 			visible = false
-			shapes = 
+			container = 
 				appendChild: (element) ->
 					expect(element).toEqual "test element"
 					visible = true
@@ -21,16 +21,16 @@ describe "addShapeElement", ->
 			
 			history = 
 				addStep: jasmine.createSpy "addStep"
-			addShapeElement.__set__ "history", history
+			addElement.__set__ "history", history
 			
 			document = 
 				getElementById: (id) ->
 					switch id
-						when "shapes" then shapes
+						when "test container" then container
 						else null
-			addShapeElement.__set__ "document", document
+			addElement.__set__ "document", document
 			
-			addShapeElement "test element"
+			addElement "test element", "test container"
 		
 		it "appends the element to the viewport", ->
 			expect(visible).toBeTruthy()

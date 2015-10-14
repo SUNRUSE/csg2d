@@ -5,14 +5,14 @@ describe "clone", ->
 		clone = rewire "./clone"
 		
 	describe "imports", ->
-		it "addShapeElement", ->
-			expect(clone.__get__ "addShapeElement").toBe require "./addShapeElement"
+		it "addElement", ->
+			expect(clone.__get__ "addElement").toBe require "./addElement"
 	
 	describe "on calling", ->
-		addShapeElement = _clone = original = undefined
+		addElement = _clone = original = undefined
 		beforeEach ->
-			addShapeElement = jasmine.createSpy "addShapeElement"
-			clone.__set__ "addShapeElement", addShapeElement
+			addElement = jasmine.createSpy "addElement"
+			clone.__set__ "addElement", addElement
 
 			_clone = undefined
 			
@@ -41,5 +41,5 @@ describe "clone", ->
 		it "moves the clone right one column", ->
 			expect(_clone.style.left).toEqual "4rem"
 		it "appends the cloned element to the viewport", ->
-			expect(addShapeElement.calls.count()).toEqual 1
-			expect(addShapeElement).toHaveBeenCalledWith _clone
+			expect(addElement.calls.count()).toEqual 1
+			expect(addElement).toHaveBeenCalledWith _clone, "shapes"

@@ -6,18 +6,18 @@ describe "addShape", ->
 		addShape = rewire "./addShape" 
 	
 	describe "imports", ->
-		it "addShapeElement", ->
-			expect(addShape.__get__ "addShapeElement").toBe require "./addShapeElement"
+		it "addElement", ->
+			expect(addShape.__get__ "addElement").toBe require "./addElement"
 		it "shapeToElement", ->
 			expect(addShape.__get__ "shapeToElement").toBe require "./../dom/shapeToElement"
 		it "pixelsPerRem", ->
 			expect(addShape.__get__ "pixelsPerRem").toBe require "./../dom/pixelsPerRem"
 	
 	describe "on calling", ->
-		shape = addShapeElement = window = undefined
+		shape = addElement = window = undefined
 		beforeEach ->
-			addShapeElement = jasmine.createSpy "addShapeElement"
-			addShape.__set__ "addShapeElement", addShapeElement
+			addElement = jasmine.createSpy "addElement"
+			addShape.__set__ "addElement", addElement
 			addShape.__set__ "pixelsPerRem", 7
 			
 			window = 
@@ -43,8 +43,8 @@ describe "addShape", ->
 					addShape "circle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 			describe "rectangle", ->
 				beforeEach ->				
@@ -59,8 +59,8 @@ describe "addShape", ->
 					addShape "rectangle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 		describe "when the screen is taller than it is wide", ->
 			beforeEach ->
@@ -78,8 +78,8 @@ describe "addShape", ->
 					addShape "circle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 			describe "rectangle", ->
 				beforeEach ->
@@ -94,8 +94,8 @@ describe "addShape", ->
 					addShape "rectangle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 		describe "when the screen is very narrow", ->
 			beforeEach ->
@@ -113,8 +113,8 @@ describe "addShape", ->
 					addShape "circle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 			describe "rectangle", ->
 				beforeEach ->
@@ -129,8 +129,8 @@ describe "addShape", ->
 					addShape "rectangle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 				
 		describe "when the screen is very short", ->
 			beforeEach ->
@@ -148,8 +148,8 @@ describe "addShape", ->
 					addShape "circle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
 					
 			describe "rectangle", ->
 				beforeEach ->
@@ -164,5 +164,5 @@ describe "addShape", ->
 					addShape "rectangle", "test operator"
 	
 				it "appends the created element to the viewport", ->
-					expect(addShapeElement.calls.count()).toEqual 1
-					expect(addShapeElement).toHaveBeenCalledWith "created element"
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"

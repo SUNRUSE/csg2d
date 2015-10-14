@@ -1,4 +1,4 @@
-addShapeElement = require "./addShapeElement"
+addElement = require "./addElement"
 shapeToElement = require "./../dom/shapeToElement"
 pixelsPerRem = require "./../dom/pixelsPerRem"
 
@@ -7,7 +7,7 @@ pixelsPerRem = require "./../dom/pixelsPerRem"
 # - A string specifying the operator to add using.
 # To create a new shape in the middle of the viewport.
 module.exports = (shape, operator) ->
-	addShapeElement shapeToElement
+	addElement (shapeToElement
 		operator: operator
 		shape: switch shape
 			when "circle"
@@ -19,4 +19,4 @@ module.exports = (shape, operator) ->
 				left: Math.round((window.pageXOffset + (window.innerWidth / 4)) / pixelsPerRem)
 				top: Math.round((window.pageYOffset + (window.innerHeight / 4)) / pixelsPerRem)
 				width: Math.max(1, Math.round((window.innerWidth / 2) / pixelsPerRem))
-				height: Math.max(1, Math.round((window.innerHeight / 2) / pixelsPerRem))
+				height: Math.max(1, Math.round((window.innerHeight / 2) / pixelsPerRem))), "shapes"
