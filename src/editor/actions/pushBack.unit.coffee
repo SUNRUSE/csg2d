@@ -18,7 +18,7 @@ describe "pushBack", ->
         it "does nothing", ->
 
     describe "when the last but not the first element in the viewport", ->
-        history = element = previousElement = viewport = moved = undefined
+        history = element = previousElement = shapes = moved = undefined
 
         beforeEach ->
             history =
@@ -27,7 +27,7 @@ describe "pushBack", ->
 
             moved = false
 
-            viewport =
+            shapes =
                 appendChild: (el) ->
                     expect(el).toBe element
                     moved = false
@@ -43,7 +43,7 @@ describe "pushBack", ->
 
             element =
                 previousElementSibling: previousElement
-                parentNode: viewport
+                parentNode: shapes
 
             pushBack element
 
@@ -84,7 +84,7 @@ describe "pushBack", ->
                         expect(history.addStep.calls.count()).toEqual 1
 
     describe "when neither the first not last element in the viewport", ->
-        history = element = previousElement = nextElement = viewport = moved = undefined
+        history = element = previousElement = nextElement = shapes = moved = undefined
 
         beforeEach ->
             history =
@@ -93,7 +93,7 @@ describe "pushBack", ->
 
             moved = false
 
-            viewport =
+            shapes =
                 insertBefore: (el, before) ->
                     expect(el).toBe element
                     switch before
@@ -111,7 +111,7 @@ describe "pushBack", ->
             element =
                 previousElementSibling: previousElement
                 nextElementSibling: nextElement
-                parentNode: viewport
+                parentNode: shapes
 
             pushBack element
 

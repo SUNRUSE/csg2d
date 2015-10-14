@@ -11,7 +11,7 @@ describe "addShapeElement", ->
 		document = history = visible = undefined
 		beforeEach ->
 			visible = false
-			viewport = 
+			shapes = 
 				appendChild: (element) ->
 					expect(element).toEqual "test element"
 					visible = true
@@ -26,7 +26,7 @@ describe "addShapeElement", ->
 			document = 
 				getElementById: (id) ->
 					switch id
-						when "viewport" then viewport
+						when "shapes" then shapes
 						else null
 			addShapeElement.__set__ "document", document
 			

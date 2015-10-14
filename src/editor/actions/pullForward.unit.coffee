@@ -18,7 +18,7 @@ describe "pullForward", ->
         it "does nothing", ->
 
     describe "when the element before last in the viewport", ->
-        history = element = nextElement = viewport = moved = undefined
+        history = element = nextElement = shapes = moved = undefined
 
         beforeEach ->
             history =
@@ -27,7 +27,7 @@ describe "pullForward", ->
 
             moved = false
 
-            viewport =
+            shapes =
                 appendChild: (el) ->
                     expect(el).toBe element
                     moved = true
@@ -43,7 +43,7 @@ describe "pullForward", ->
 
             element =
                 nextElementSibling: nextElement
-                parentNode: viewport
+                parentNode: shapes
 
             pullForward element
 
@@ -84,7 +84,7 @@ describe "pullForward", ->
                         expect(history.addStep.calls.count()).toEqual 1
 
     describe "when at least two elements from the end", ->
-        history = element = nextElement = lastElement = viewport = moved = undefined
+        history = element = nextElement = lastElement = shapes = moved = undefined
 
         beforeEach ->
             history =
@@ -93,7 +93,7 @@ describe "pullForward", ->
 
             moved = false
 
-            viewport =
+            shapes =
                 insertBefore: (el, before) ->
                     expect(el).toBe element
                     switch before
@@ -114,7 +114,7 @@ describe "pullForward", ->
 
             element =
                 nextElementSibling: nextElement
-                parentNode: viewport
+                parentNode: shapes
 
             pullForward element
 

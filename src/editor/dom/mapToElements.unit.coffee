@@ -9,7 +9,7 @@ describe "mapToElements", ->
         it "shapeToElement", -> expect(mapToElements.__get__ "shapeToElement").toBe require "./shapeToElement"
         
     describe "on calling", ->
-        viewport = removed = undefined
+        shapes = removed = undefined
         
         beforeEach ->
             mapToElements.__set__ "shapeToElement", (shape) -> switch shape
@@ -21,32 +21,32 @@ describe "mapToElements", ->
                 
             removed = 0
                 
-            viewport = 
+            shapes = 
                 firstChild: "test to remove a"
                 removeChild: (child) -> 
                     switch removed
                         when 0
                             expect(child).toEqual "test to remove a"
-                            viewport.firstChild = "test to remove b"
+                            shapes.firstChild = "test to remove b"
                             removed++
                         when 1
                             expect(child).toEqual "test to remove b"
-                            viewport.firstChild = "test to remove c"
+                            shapes.firstChild = "test to remove c"
                             removed++
                         when 2
                             expect(child).toEqual "test to remove c"
-                            viewport.firstChild = null
+                            shapes.firstChild = null
                             removed++
                         else fail "removed unexpected item"
                 appendChild: jasmine.createSpy "appendChild"
                 
-            viewport.appendChild.and.callFake (child) ->
+            shapes.appendChild.and.callFake (child) ->
                 expect(removed).toEqual 3
                     
                 
             document = 
                 getElementById: (id) -> switch id
-                    when "viewport" then viewport
+                    when "shapes" then shapes
                     else expect(false).toBeTruthy()
             mapToElements.__set__ "document", document
                 
@@ -62,7 +62,7 @@ describe "mapToElements", ->
             expect(removed).toEqual 3
         
         it "appends a single element for each shape to the viewport in order", ->
-            expect(viewport.appendChild.calls.allArgs()).toEqual [
+            expect(shapes.appendChild.calls.allArgs()).toEqual [
                     ["test element a"],
                     ["test element b"],
                     ["test element c"],

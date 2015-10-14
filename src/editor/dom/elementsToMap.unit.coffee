@@ -15,7 +15,7 @@ describe "elementsToMap", ->
             document = 
                 getElementById: (id) ->
                     switch id
-                        when "viewport"
+                        when "shapes"
                             children: [
                                     "test element a"
                                     "test element b"
