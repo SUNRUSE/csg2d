@@ -18,8 +18,26 @@
         }
     },
     "properties": {
-        "spawn": {
-            "$ref": "#/definitions/point"
+        "entities": {
+            "type": "object",
+            "properties": {
+                "player": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "origin": {
+                                "$ref": "#/definitions/point"
+                            },
+                            "facing": {
+                                "enum": ["left", "right"]
+                            }
+                        },
+                        "required": ["origin", "facing"]
+                    }
+                }
+            },
+            "required": ["player"]
         },
         "shapes": {
             "type": "array",
@@ -69,5 +87,5 @@
             }
         }
     },
-    "required": ["spawn", "shapes"]
+    "required": ["entities", "shapes"]
 }
