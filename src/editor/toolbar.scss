@@ -4,12 +4,14 @@ nav {
 	left: 0;
 	
 	button, label {
+		display: block;
+		float: left;
 		width: 2rem;
 		height: 2rem;
 		background: orange;
 		border-right: 0.125rem solid darkorange;
 		font-size: 1.5rem;
-		line-height: 1.5rem;
+		line-height: 2rem;
 		text-align: center;
 		touch-action: none;
 		cursor: pointer;
@@ -58,5 +60,13 @@ nav {
 	
 	button[id="save"]::before {
 		content: "\21E9";
+	}
+	
+	label[id="open"]::before {
+		content: "\21E7";
+	}
+	
+	input[type="file"] {
+		display: none;
 	}
 }

@@ -11,9 +11,11 @@ describe "eventBindings", ->
 	describe "imports", ->
 		it "events", ->
 			expect(eventBindings.__get__ "events").toBe require "./events"
+		it "loadFile", ->
+			expect(eventBindings.__get__ "loadFile").toBe require "./io/loadFile"
 			
 	describe "on startup", ->
-		events = undefined
+		events = loadFile = undefined
 		beforeEach ->
 			global.window.innerWidth = 600
 			global.window.innerHeight = 350
@@ -23,6 +25,9 @@ describe "eventBindings", ->
 			
 			events = {}
 			eventBindings.__set__ "events", events
+			
+			loadFile = jasmine.createSpy "loadFile"
+			eventBindings.__set__ "loadFile", loadFile
 		it "listens for window.onload", ->
 			expect(window.onload).toEqual jasmine.any Function
 		it "does not listen for document events yet", ->
@@ -32,6 +37,7 @@ describe "eventBindings", ->
 			expect(document.ontouchdown).toBeUndefined()
 			expect(document.ontouchmove).toBeUndefined()
 			expect(document.ontouchup).toBeUndefined()
+			expect(loadFile).not.toHaveBeenCalled()
 		describe "on window.onload", ->
 			beforeEach ->
 				window.scrollTo = jasmine.createSpy "scrollTo"
@@ -48,6 +54,8 @@ describe "eventBindings", ->
 				expect(document.ontouchmove).toEqual jasmine.any Function
 			it "listens for document.ontouchend", ->
 				expect(document.ontouchend).toEqual jasmine.any Function
+			it "sets up loading files", ->
+				expect(loadFile.calls.count()).toEqual 1
 			describe "on mouse down", ->
 				beforeEach ->
 					events.start = jasmine.createSpy "start"
