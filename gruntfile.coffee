@@ -15,6 +15,13 @@ module.exports = (grunt) ->
     
     grunt.initConfig
         copy:
+            build:
+                files: [
+                    expand: true
+                    cwd: "src"
+                    src: ["**/*.json"]
+                    dest: "build"
+                ]
             deploy: 
                 files: [
                     expand: true
@@ -84,5 +91,5 @@ module.exports = (grunt) ->
             files: ["src/**/*"],
             tasks: ["build", "deploy"]
     
-    grunt.registerTask "build", ["clean:build", "coffee", "jasmine_nodejs", "jade", "sass", "webpack", "uglify", "cssmin"]
+    grunt.registerTask "build", ["clean:build", "copy:build", "coffee", "jasmine_nodejs", "jade", "sass", "webpack", "uglify", "cssmin"]
     grunt.registerTask "deploy", ["clean:deploy", "copy:deploy"]
