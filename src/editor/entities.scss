@@ -1,0 +1,51 @@
+.entity {
+	position: absolute;
+	opacity: 0.5;
+	border: 0.125rem solid lime;
+	margin-top: -0.125rem;
+	margin-left: -0.125rem;
+}
+
+.entity::before, .entity::after {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	height: 1rem;
+	line-height: 1rem;
+	
+	text-align: center;
+
+	text-shadow: 0 0 0.25rem black, 0 0 0.5rem black;
+}
+
+.entity::before {
+	content: attr(type);
+	margin-top: -2rem;
+}
+
+.entity::after {
+	content: attr(name);
+	margin-top: 1rem;
+}
+
+.entity:focus {
+	opacity: 1.0;
+}
+
+.entity[type="player"] {
+	width: 8rem;
+	height: 8rem;
+	margin-top: -4.125rem;
+	margin-left: -4.125rem;
+	border-radius: 50%;
+}
+
+.entity[type="player"][facing="right"] {
+	border-right-width: 1rem;
+}
+
+.entity[type="player"][facing="left"] {
+	margin-left: -5rem;
+	border-left-width: 1rem;
+}
