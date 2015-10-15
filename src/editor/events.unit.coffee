@@ -20,6 +20,7 @@ describe "events", ->
 		it "operator", -> expect(events.__get__ "operator").toBe require "./actions/operator"
 		it "elementsToMap", -> expect(events.__get__ "elementsToMap").toBe require "./dom/elementsToMap"
 		it "saveFile", -> expect(events.__get__ "saveFile").toBe require "./io/saveFile"
+		it "addPlayer", -> expect(events.__get__ "addPlayer").toBe require "./actions/entities/addPlayer"
 		
 	describe "on calling", ->
 		history = dependencies = undefined
@@ -49,6 +50,7 @@ describe "events", ->
 				"operator"
 				"elementsToMap"
 				"saveFile"
+				"addPlayer"
 			]
 		
 		doesNothingAfterClick = ->
@@ -250,6 +252,14 @@ describe "events", ->
 						it "creates one new shape based on the attributes set", ->
 							expect(dependencies.addShape.calls.count()).toEqual 1
 							expect(dependencies.addShape).toHaveBeenCalledWith "test shape", "test operator"
+						doesNothingAfterClick()
+					describe "when the target element's id is \"addPlayer\"", ->
+						beforeEach -> 
+							id = "addPlayer"
+							dependencies.addPlayer.and.stub()
+							go()
+						it "creates one new player", ->
+							expect(dependencies.addPlayer.calls.count()).toEqual 1
 						doesNothingAfterClick()
 					describe "when the target element's id is \"save\"", ->
 						beforeEach -> 
@@ -485,6 +495,11 @@ describe "events", ->
 						describe "when the target element is enabled", ->
 							beforeEach ->
 								go()
+							doesNothing()
+					describe "when the target element's id is \"addPlayer\"", ->
+						beforeEach -> 
+							id = "addPlayer"
+							go()
 							doesNothing()
 					describe "when the target element's class is \"add\"", ->
 						beforeEach -> 

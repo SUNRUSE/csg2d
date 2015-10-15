@@ -69,4 +69,8 @@ nav {
 	input[type="file"] {
 		display: none;
 	}
+	
+	button[id="addPlayer"]::before {
+		content: "Pl";
+	}
 }

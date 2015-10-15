@@ -14,6 +14,8 @@ left = require "./actions/bounds/left"
 right = require "./actions/bounds/right"
 radius = require "./actions/bounds/radius"
 
+addPlayer = require "./actions/entities/addPlayer"
+
 elementsToMap = require "./dom/elementsToMap"
 saveFile = require "./io/saveFile"
 
@@ -41,6 +43,7 @@ module.exports =
 						when "undo" then history.undo()
 						when "redo" then history.redo()
 						when "save" then saveFile "map.json", elementsToMap()
+						when "addPlayer" then addPlayer()
 						else switch element.className
 							when "add" then addShape (element.getAttribute "shape"), (element.getAttribute "operator")
 	start: (element) -> 
