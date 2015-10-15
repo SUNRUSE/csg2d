@@ -10,6 +10,7 @@ describe "events", ->
 		it "delete", -> expect(events.__get__ "_delete").toBe require "./actions/delete"
 		it "clone", -> expect(events.__get__ "clone").toBe require "./actions/clone"
 		it "move", -> expect(events.__get__ "move").toBe require "./actions/bounds/move"
+		it "moveMiddle", -> expect(events.__get__ "moveMiddle").toBe require "./actions/bounds/moveMiddle"
 		it "left", -> expect(events.__get__ "left").toBe require "./actions/bounds/left"
 		it "top", -> expect(events.__get__ "top").toBe require "./actions/bounds/top"
 		it "right", -> expect(events.__get__ "right").toBe require "./actions/bounds/right"
@@ -40,6 +41,7 @@ describe "events", ->
 				"_delete"
 				"clone"
 				"move"
+				"moveMiddle"
 				"left"
 				"right"
 				"top"
@@ -161,6 +163,12 @@ describe "events", ->
 						describe "when the target element is a move handle", ->
 							beforeEach ->
 								attributes.kind = "move"
+								go()
+							doesNothing()
+							
+						describe "when the target element is a moveMiddle handle", ->
+							beforeEach ->
+								attributes.kind = "moveMiddle"
 								go()
 							doesNothing()
 							
@@ -471,6 +479,9 @@ describe "events", ->
 							
 						describe "when the target element is a move handle", ->
 							withContinuation "move"
+							
+						describe "when the target element is a moveMiddle handle", ->
+							withContinuation "moveMiddle"
 							
 				describe "when the target element is a button", ->
 					beforeEach -> tagName = "BUTTON"

@@ -51,8 +51,8 @@ describe "entityToElement", ->
 				expect(element.style.top).toEqual "16rem"
 			it "copies the facing direction to an attribute", ->
 				expect(element.setAttribute).toHaveBeenCalledWith "facing", "test facing"
-			it "includes a move handle", ->
-				expect(createHandle).toHaveBeenCalledWith element, "move"
+			it "includes a move-from-middle handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "moveMiddle"
 			it "includes a delete handle", ->
 				expect(createHandle).toHaveBeenCalledWith element, "delete"
 			it "includes a clone handle", ->

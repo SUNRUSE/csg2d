@@ -9,7 +9,7 @@ module.exports = (type, name, details) ->
 	element = document.createElement "div"
 	createHandle element, "delete"
 	createHandle element, "clone"
-	createHandle element, "move"
+	createHandle element, "moveMiddle"
 	element.className = "entity"
 	element.setAttribute "type", type
 	element.setAttribute "name", name

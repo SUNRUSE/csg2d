@@ -8,6 +8,7 @@ pushBack = require "./actions/pushBack"
 operator = require "./actions/operator"
 
 move = require "./actions/bounds/move"
+moveMiddle = require "./actions/bounds/moveMiddle"
 top = require "./actions/bounds/top"
 bottom = require "./actions/bounds/bottom"
 left = require "./actions/bounds/left"
@@ -52,9 +53,10 @@ module.exports =
 				when "DIV"
 					switch element.className
 						when "handle" then switch element.getAttribute "kind"
-							when "move", "left", "right", "top", "bottom", "radiusLeft", "radiusRight", "radiusTop", "radiusBottom"
+							when "move", "moveMiddle", "left", "right", "top", "bottom", "radiusLeft", "radiusRight", "radiusTop", "radiusBottom"
 								currentAction = switch element.getAttribute "kind"
 									when "move" then move element.parentNode
+									when "moveMiddle" then moveMiddle element.parentNode
 									when "left" then left element.parentNode
 									when "right" then right element.parentNode
 									when "top" then top element.parentNode

@@ -16,7 +16,7 @@
 	cursor: pointer;
 }
 
-.handle[kind="move"] {
+.handle[kind="move"], .handle[kind="moveMiddle"] {
 	display: block;
 }
 
@@ -64,7 +64,7 @@
 	bottom: 0;
 }
 
-.handle[kind="move"]:after {
+.handle[kind="moveMiddle"]::after, .handle[kind="move"]::after {
 	content: "\2722";
 }
 
