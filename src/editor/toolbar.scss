@@ -73,4 +73,28 @@ nav {
 	button[id="addPlayer"]::before {
 		content: "Pl";
 	}
+	
+	button[id="play"]::before {
+		content: "\25B6";
+	}
+	
+	button[id="stop"]::before {
+		content: "\2B1B";
+	}
+}
+
+[mode="play"] {
+	nav {
+		[id="play"], [class="add"], [id="save"], [id="undo"], [id="redo"], [id="open"], [id="save"], [id="addPlayer"] {
+			display: none;
+		}
+	}
+}
+
+[mode="edit"] {
+	nav {
+		[id="stop"] {
+			display: none;
+		}
+	}
 }

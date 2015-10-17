@@ -17,6 +17,9 @@ radius = require "./actions/bounds/radius"
 
 addPlayer = require "./actions/entities/addPlayer"
 
+play = require "./actions/play"
+stop = require "./actions/stop"
+
 elementsToMap = require "./dom/elementsToMap"
 saveFile = require "./io/saveFile"
 
@@ -41,6 +44,8 @@ module.exports =
 							when "pushBack" then pushBack element.parentNode
 				when "BUTTON"
 					switch element.id
+						when "play" then play()
+						when "stop" then stop()
 						when "undo" then history.undo()
 						when "redo" then history.redo()
 						when "save" then saveFile "map.json", elementsToMap()

@@ -22,6 +22,8 @@ describe "events", ->
 		it "elementsToMap", -> expect(events.__get__ "elementsToMap").toBe require "./dom/elementsToMap"
 		it "saveFile", -> expect(events.__get__ "saveFile").toBe require "./io/saveFile"
 		it "addPlayer", -> expect(events.__get__ "addPlayer").toBe require "./actions/entities/addPlayer"
+		it "play", -> expect(events.__get__ "play").toBe require "./actions/play"
+		it "stop", -> expect(events.__get__ "stop").toBe require "./actions/stop"
 		
 	describe "on calling", ->
 		history = dependencies = undefined
@@ -53,6 +55,8 @@ describe "events", ->
 				"elementsToMap"
 				"saveFile"
 				"addPlayer"
+				"play"
+				"stop"
 			]
 		
 		doesNothingAfterClick = ->
@@ -268,6 +272,22 @@ describe "events", ->
 							go()
 						it "creates one new player", ->
 							expect(dependencies.addPlayer.calls.count()).toEqual 1
+						doesNothingAfterClick()
+					describe "when the target element's id is \"play\"", ->
+						beforeEach -> 
+							id = "play"
+							dependencies.play.and.stub()
+							go()
+						it "switches to play mode", ->
+							expect(dependencies.play.calls.count()).toEqual 1
+						doesNothingAfterClick()
+					describe "when the target element's id is \"stop\"", ->
+						beforeEach -> 
+							id = "stop"
+							dependencies.stop.and.stub()
+							go()
+						it "switches to stop mode", ->
+							expect(dependencies.stop.calls.count()).toEqual 1
 						doesNothingAfterClick()
 					describe "when the target element's id is \"save\"", ->
 						beforeEach -> 
@@ -511,7 +531,17 @@ describe "events", ->
 						beforeEach -> 
 							id = "addPlayer"
 							go()
-							doesNothing()
+						doesNothing()
+					describe "when the target element's id is \"play\"", ->
+						beforeEach -> 
+							id = "play"
+							go()
+						doesNothing()
+					describe "when the target element's id is \"stop\"", ->
+						beforeEach -> 
+							id = "stop"
+							go()
+						doesNothing()
 					describe "when the target element's class is \"add\"", ->
 						beforeEach -> 
 							className = "add"
