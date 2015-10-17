@@ -5,7 +5,7 @@
 	overflow: hidden;
 }
 
-#viewport::after {
+[mode="edit"] #viewport::after {
     position: absolute;
     left: 0;
     top: 0;

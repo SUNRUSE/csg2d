@@ -11,7 +11,7 @@
 	background: black;
 }
 
-.shape::after {
+[mode="edit"] .shape::after {
 	left: 0;
 	top: 0;
 	right: 0;
