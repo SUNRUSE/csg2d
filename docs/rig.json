@@ -1,0 +1,88 @@
+{
+	"title": "OpenShred Rig",
+    "__note__": "This schema does not prevent references to nonexistent materials, points or attempts to link points to themselves.",
+	"type": "object",
+    "definitions": {
+        "point": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            },
+            "required": ["x", "y"]
+        }
+    },
+	"properties": {
+		"materials": {
+			"type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "density": {
+                        "type": "number"
+                    },
+                    "airResistance": {
+                        "type": "number",
+                        "minimum": 1
+                    },
+                    "friction": {
+                        "type": "number",
+                        "minimum": 1
+                    },
+                    "mass": {
+                        "type": "number",
+                        "minimum": 0,
+                        "exclusiveMinimum": true
+                    }
+                },
+                "required": ["density", "airResistance", "friction", "mass"]
+            }
+		},
+		"points": {
+			"type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "$ref": "#/definitions/point"
+                    },
+                    "material": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": ["location", "material"]
+            }
+		},
+		"links": {
+			"type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "to": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "strength": {
+                        "type": "number",
+                        "minimum": 0
+                    },
+                    "linearity": {
+                        "type": "number",
+                        "minimum": 0
+                    }
+                },
+                "required": ["from", "to", "strength", "linearity"]
+            }
+		}
+	},
+	"required": ["materials", "points", "links"]
+}
