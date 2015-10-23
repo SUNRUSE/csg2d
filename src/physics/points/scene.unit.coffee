@@ -181,14 +181,20 @@ describe "scene", ->
 							describe "when the program is in \"play\" mode", ->
 								beforeEach ->
 									mode = "play"
-									(setInterval.calls.argsFor 0)[0]()
 								it "does not set up another interval", ->
+									(setInterval.calls.argsFor 0)[0]()
 									expect(setInterval.calls.count()).toEqual 1
 								it "does not clear an interval", ->
+									(setInterval.calls.argsFor 0)[0]()
 									expect(clearInterval).not.toHaveBeenCalled()
 								it "calls all callbacks", ->
+									(setInterval.calls.argsFor 0)[0]()
 									expect(callbackA.calls.count()).toEqual 1
 									expect(callbackB.calls.count()).toEqual 1
+								it "calls the callbacks in order", ->
+									callbackB.and.callFake ->
+										expect(callbackA).toHaveBeenCalled()
+									(setInterval.calls.argsFor 0)[0]()
 							describe "when the program is not in \"play\" mode", ->
 								beforeEach ->
 									mode = "other"
