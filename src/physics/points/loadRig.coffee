@@ -4,7 +4,7 @@ link = require "./link"
 # Given:
 # - A distance field function to collide against.
 # - A JSON object specifying a rig to load.
-# - A vector specifying an offset.  This is added to each point's X location.
+# - A vector specifying an offset.  This is added to each point's location.
 # - The object returned by "scene".
 # - A function called for every point.  This is given the point object created and the returned function will be called after every update of the point's location.
 module.exports = (distanceField, rig, offset, scene, create) ->
