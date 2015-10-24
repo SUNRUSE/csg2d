@@ -1,0 +1,59 @@
+{
+	"materials": {
+		"person": {
+			"density": 1,
+			"friction": 2,
+			"airResistance": 1.1,
+			"mass": 1
+		},
+		"wheel": {
+			"density": 1,
+			"friction": 1,
+			"airResistance": 1,
+			"mass": 2
+		}
+	},
+	"points": {
+		"torso": {
+			"location": {
+				"x": 0,
+				"y": 0
+			},
+			"material": "person"
+		},
+		"backWheel": {
+			"location": {
+				"x": -2,
+				"y": 2
+			},
+			"material": "wheel"
+		},
+		"frontWheel": {
+			"location": {
+				"x": 2,
+				"y": 2
+			},
+			"material": "wheel"
+		}
+	},
+	"links": {
+		"frontSlope": {
+			"from": "torso",
+			"to": "frontWheel",
+			"strength": 0.1,
+			"linearity": 1
+		},
+		"backSlope": {
+			"from": "torso",
+			"to": "backWheel",
+			"strength": 0.1,
+			"linearity": 1
+		},
+		"axle": {
+			"from": "backWheel",
+			"to": "frontWheel",
+			"strength": 0.05,
+			"linearity": 1
+		}
+	}
+}
