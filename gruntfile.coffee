@@ -66,6 +66,11 @@ module.exports = (grunt) ->
                 output:
                     path: "build/editor"
                     filename: "packed.js"      
+                module:
+                    loaders: [
+                            test: /\.json$/
+                            loader: "json-loader"
+                        ]
         uglify:
             build:
                 files:
