@@ -1,6 +1,11 @@
 elementsToMap = require "./../dom/elementsToMap"
 valueOfObject = require "./../../utilities/random/valueOfObject"
 
+mapToDistanceField = require "./../../physics/distanceFields/mapToDistanceField"
+scene = require "./../../physics/points/scene"
+loadRig = require "./../../physics/points/loadRig"
+player = require "./../../physics/points/rigs/player"
+
 # On calling, switches the editor to "play" mode, spawning a player and removing all editor controls.
 # If no player spawn points exist, an alert is shown and play mode is not entered.
 module.exports = () ->
@@ -10,3 +15,21 @@ module.exports = () ->
 	else
 		spawn = valueOfObject map.entities.player
 		document.body.setAttribute "mode", "play"
+		instance = scene()
+		
+		# We have to expose the function to stop the event loop somewhere
+		# so that the stop button can do it.
+		module.exports.stop = instance.stop
+		
+		distanceField = mapToDistanceField map
+		loadRig distanceField, player, spawn.origin, instance, (point) ->
+			element = document.createElement "div"
+			element.className = "point"
+			
+			update = ->
+				element.style.transform = "translate(" + point.location.x + "rem," + point.location.y + "rem)"
+			update()
+			
+			document.getElementById "preview"
+				.appendChild element
+			update
