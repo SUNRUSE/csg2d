@@ -39,7 +39,7 @@ describe "range", ->
 				
 			it "returns max at 1.0", ->
 				random = 1.0
-				expect(range 3, 7).toEqual 7
+				expect(range 3, 7).toEqual 6
 				
 		describe "when given negative min/max", ->
 			it "returns min at 0.0", ->
@@ -50,9 +50,13 @@ describe "range", ->
 				random = 0.5
 				expect(range -7, -3).toEqual -5
 				
+			it "rounds to the nearest integer", ->
+				random = 0.55
+				expect(range -7, -3).toEqual -5
+				
 			it "returns max at 1.0", ->
 				random = 1.0
-				expect(range -7, -3).toEqual -3
+				expect(range -7, -3).toEqual -4
 				
 		describe "when given negative min and positive max", ->
 			it "returns min at 0.0", ->
@@ -65,4 +69,4 @@ describe "range", ->
 				
 			it "returns max at 1.0", ->
 				random = 1.0
-				expect(range -3, 7).toEqual 7
+				expect(range -3, 7).toEqual 6
