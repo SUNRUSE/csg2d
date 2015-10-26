@@ -7,3 +7,4 @@ module.exports = (element, kind) ->
 	handle.className = "handle"
 	handle.setAttribute "kind", kind
 	element.appendChild handle
+	handle

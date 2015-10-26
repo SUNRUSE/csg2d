@@ -13,7 +13,7 @@ describe "createHandle", ->
 		it "document", -> expect(createHandle.__get__ "document").toBe document
 	
 	describe "on calling", ->
-		element = parent = undefined
+		result = element = parent = undefined
 		beforeEach ->
 			element = 
 				style: {}
@@ -23,7 +23,7 @@ describe "createHandle", ->
 				
 			document.createElement.and.callFake (type) -> element
 			
-			createHandle parent, "test kind"
+			result = createHandle parent, "test kind"
 			
 		it "creates exactly one div", ->
 			expect(document.createElement.calls.count()).toEqual 1
@@ -34,3 +34,5 @@ describe "createHandle", ->
 			expect(element.className).toEqual "handle"
 		it "appends the new handle to the parent shape", ->
 			expect(parent.appendChild).toHaveBeenCalledWith element
+		it "returns the element created", ->
+			expect(result).toBe element
