@@ -88,6 +88,18 @@
 	content: "\2442";
 }
 
+.handle[kind="angle"] {
+	background: linear-gradient(to left, blue, blue 2rem, transparent);
+	padding-left: 4rem;
+	transform-origin: 0.75rem 0.75rem;
+}
+
+.handle[kind="angle"]::after {
+	width: 5.25rem;
+	text-align: right;
+	content: "\21BB";
+}
+
 .handle[kind="radiusLeft"]::after, .handle[kind="radiusRight"]::after, .handle[kind="radiusTop"]::after, .handle[kind="radiusBottom"]::after {
 	content: "\25CE";
 }
