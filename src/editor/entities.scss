@@ -33,11 +33,14 @@
 	opacity: 1.0;
 }
 
-.entity[type="player"] {
+.entity[type="player"], .entity[falloff="ambient"] {
 	width: 8rem;
 	height: 8rem;
 	margin-top: -4.125rem;
 	margin-left: -4.125rem;
+}
+
+.entity[type="player"] {
 	border-radius: 50%;
 }
 
@@ -48,4 +51,8 @@
 .entity[type="player"][facing="left"] {
 	margin-left: -5rem;
 	border-left-width: 1rem;
+}
+
+.entity[type="gravity"] input[type="range"] {
+	width: 100%;
 }
