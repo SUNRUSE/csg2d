@@ -11,6 +11,7 @@ describe "events", ->
 		it "clone", -> expect(events.__get__ "clone").toBe require "./actions/clone"
 		it "move", -> expect(events.__get__ "move").toBe require "./actions/bounds/move"
 		it "moveMiddle", -> expect(events.__get__ "moveMiddle").toBe require "./actions/bounds/moveMiddle"
+		it "angle", -> expect(events.__get__ "angle").toBe require "./actions/bounds/angle"
 		it "left", -> expect(events.__get__ "left").toBe require "./actions/bounds/left"
 		it "top", -> expect(events.__get__ "top").toBe require "./actions/bounds/top"
 		it "right", -> expect(events.__get__ "right").toBe require "./actions/bounds/right"
@@ -44,6 +45,7 @@ describe "events", ->
 				"clone"
 				"move"
 				"moveMiddle"
+				"angle"
 				"left"
 				"right"
 				"top"
@@ -197,6 +199,12 @@ describe "events", ->
 						describe "when the target element is a bottom handle", ->
 							beforeEach ->
 								attributes.kind = "bottom"
+								go()
+							doesNothing()
+							
+						describe "when the target element is an angle handle", ->
+							beforeEach ->
+								attributes.kind = "angle"
 								go()
 							doesNothing()
 							
@@ -365,7 +373,7 @@ describe "events", ->
 								go()
 							doesNothing()
 							
-						withContinuation = (name, dependency) ->
+						withContinuation = (name, dependency, passHandleInstead) ->
 							dependency = dependency or name
 							continuation = undefined
 							beforeEach ->
@@ -378,7 +386,7 @@ describe "events", ->
 								go()
 							it "calls move with the target element", ->
 								expect(dependencies[dependency].calls.count()).toEqual 1
-								expect(dependencies[dependency]).toHaveBeenCalledWith "test parent node"
+								expect(dependencies[dependency]).toHaveBeenCalledWith (if passHandleInstead then target else "test parent node")
 							it "does not move or end the continuation", ->
 								expect(continuation.move).not.toHaveBeenCalled()
 								expect(continuation.end).not.toHaveBeenCalled()
@@ -472,6 +480,9 @@ describe "events", ->
 										expect(continuation.move.calls.count()).toEqual 0
 									it "does not end the continuation", ->
 										expect(continuation.end.calls.count()).toEqual 1
+							
+						describe "when the target element is an angle handle", ->
+							withContinuation "angle", null, true
 							
 						describe "when the target element is a left handle", ->
 							withContinuation "left"

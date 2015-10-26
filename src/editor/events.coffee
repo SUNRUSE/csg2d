@@ -14,6 +14,7 @@ bottom = require "./actions/bounds/bottom"
 left = require "./actions/bounds/left"
 right = require "./actions/bounds/right"
 radius = require "./actions/bounds/radius"
+angle = require "./actions/bounds/angle"
 
 addPlayer = require "./actions/entities/addPlayer"
 
@@ -58,7 +59,7 @@ module.exports =
 				when "DIV"
 					switch element.className
 						when "handle" then switch element.getAttribute "kind"
-							when "move", "moveMiddle", "left", "right", "top", "bottom", "radiusLeft", "radiusRight", "radiusTop", "radiusBottom"
+							when "move", "moveMiddle", "left", "right", "top", "bottom", "radiusLeft", "radiusRight", "radiusTop", "radiusBottom", "angle"
 								currentAction = switch element.getAttribute "kind"
 									when "move" then move element.parentNode
 									when "moveMiddle" then moveMiddle element.parentNode
@@ -66,6 +67,7 @@ module.exports =
 									when "right" then right element.parentNode
 									when "top" then top element.parentNode
 									when "bottom" then bottom element.parentNode
+									when "angle" then angle element
 									when "radiusLeft", "radiusRight", "radiusTop", "radiusBottom" then radius element.parentNode
 	move: (x, y) -> if currentAction then currentAction.move x, y
 	end: () -> 
