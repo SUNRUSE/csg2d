@@ -74,6 +74,10 @@ nav {
 		content: "Pl";
 	}
 	
+	button[class="addEntity"][type="gravity"]:before {
+		content: "Gr";
+	}
+	
 	button[id="play"]::before {
 		content: "\25B6";
 	}
@@ -85,7 +89,7 @@ nav {
 
 [mode="play"] {
 	nav {
-		[id="play"], [class="add"], [id="save"], [id="undo"], [id="redo"], [id="open"], [id="save"], [id="addPlayer"] {
+		[id="play"], [class="add"], [id="save"], [id="undo"], [id="redo"], [id="open"], [id="save"], [id="addPlayer"], [class="addEntity"] {
 			display: none;
 		}
 	}
