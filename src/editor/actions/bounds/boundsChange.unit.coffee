@@ -21,6 +21,7 @@ describe "boundsChange", ->
 					top: "before top"
 					height: "before height"
 					width: "before width"
+					transform: "before transform"
 				
 			result = boundsChange element
 		
@@ -32,6 +33,8 @@ describe "boundsChange", ->
 			expect(element.style.width).toEqual "before width"
 		it "does not modify height", ->
 			expect(element.style.height).toEqual "before height"
+		it "does not modify transform", ->
+			expect(element.style.transform).toEqual "before transform"
 		it "returns a function", ->
 			expect(result).toEqual jasmine.any Function
 		it "does not add a history step yet", ->
@@ -42,6 +45,7 @@ describe "boundsChange", ->
 				element.style.left = "after left"
 				element.style.width = "after width"
 				element.style.height = "after height"
+				element.style.transform = "after transform"
 				
 				result()
 			it "does not modify top", ->
@@ -52,6 +56,8 @@ describe "boundsChange", ->
 				expect(element.style.width).toEqual "after width"
 			it "does not modify height", ->
 				expect(element.style.height).toEqual "after height"
+			it "does not modify transform", ->
+				expect(element.style.transform).toEqual "after transform"
 			it "adds a history step", ->
 				expect(history.addStep).toHaveBeenCalledWith (jasmine.any Function), (jasmine.any Function), (jasmine.any Function)
 				expect(history.addStep.calls.count()).toEqual 1
@@ -66,6 +72,8 @@ describe "boundsChange", ->
 					expect(element.style.width).toEqual "after width"
 				it "does not modify height", ->
 					expect(element.style.height).toEqual "after height"
+				it "does not modify transform", ->
+					expect(element.style.transform).toEqual "after transform"
 				it "does not add another history step", ->
 					expect(history.addStep.calls.count()).toEqual 1
 			describe "on undoing", ->
@@ -79,6 +87,8 @@ describe "boundsChange", ->
 					expect(element.style.width).toEqual "before width"
 				it "reverts height", ->
 					expect(element.style.height).toEqual "before height"
+				it "reverts transform", ->
+					expect(element.style.transform).toEqual "before transform"
 				it "does not add another history step", ->
 					expect(history.addStep.calls.count()).toEqual 1
 				describe "on discarding", ->
@@ -92,6 +102,8 @@ describe "boundsChange", ->
 						expect(element.style.width).toEqual "before width"
 					it "reverts height", ->
 						expect(element.style.height).toEqual "before height"
+					it "reverts transform", ->
+						expect(element.style.transform).toEqual "before transform"
 					it "does not add another history step", ->
 						expect(history.addStep.calls.count()).toEqual 1
 				describe "on redoing", ->
@@ -105,5 +117,7 @@ describe "boundsChange", ->
 						expect(element.style.width).toEqual "after width"
 					it "restores height", ->
 						expect(element.style.height).toEqual "after height"
+					it "restores transform", ->
+						expect(element.style.transform).toEqual "after transform"
 					it "does not add another history step", ->
 						expect(history.addStep.calls.count()).toEqual 1
