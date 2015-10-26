@@ -1,3 +1,5 @@
+elementToFalloff = require "./elementToFalloff"
+
 # Given an element representing the entity in the viewport.
 # Returns an object containing:
 # - type: String specifying the type of entity.
@@ -12,3 +14,8 @@ module.exports = (element) ->
 				x: parseInt element.style.left
 				y: parseInt element.style.top
 			facing: element.getAttribute "facing"
+		when "gravity"
+			output = 
+				falloff: elementToFalloff element
+			(output.intensity = parseFloat el.value) for el in element.children when el.tagName is "INPUT" 
+			output

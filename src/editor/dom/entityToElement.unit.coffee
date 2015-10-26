@@ -14,9 +14,11 @@ describe "entityToElement", ->
 			expect(entityToElement.__get__ "document").toBe document
 		it "createHandle", ->
 			expect(entityToElement.__get__ "createHandle").toBe require "./createHandle"
-	
+		it "falloffToElement", ->
+			expect(entityToElement.__get__ "falloffToElement").toBe require "./falloffToElement"
+
 	describe "on calling", ->
-		createHandle = element = undefined
+		falloffToElement = createHandle = element = valueChange = undefined
 		beforeEach ->
 			element = 
 				style: {}
@@ -26,6 +28,9 @@ describe "entityToElement", ->
 			
 			createHandle = jasmine.createSpy "createHandle"
 			entityToElement.__set__ "createHandle", createHandle
+			
+			falloffToElement = jasmine.createSpy "falloffToElement"
+			entityToElement.__set__ "falloffToElement", falloffToElement
 		
 		describe "player", ->
 			result = undefined
@@ -61,3 +66,68 @@ describe "entityToElement", ->
 				expect(element.className).toEqual "entity"
 			it "sets the tabIndex to 0", ->
 				expect(element.tabIndex).toEqual 0
+			it "does not set the element up as a falloff", ->
+				expect(falloffToElement).not.toHaveBeenCalled()
+		describe "gravity", ->
+			input = result = go = undefined
+			beforeEach ->
+				input = {}
+				element.appendChild = jasmine.createSpy "appendChild"
+				
+				document.createElement.and.callFake (tagName) -> switch tagName
+					when "div" then element
+					when "input" then input
+					else fail "unexpected tag name"
+				
+				go = ->
+					result = entityToElement "gravity", "test name",
+						falloff: "test falloff"
+						intensity: 0.7
+			
+			it "creates exactly one div and one input", ->
+				go()
+				expect(document.createElement.calls.count()).toEqual 2
+				expect(document.createElement).toHaveBeenCalledWith "div"
+				expect(document.createElement).toHaveBeenCalledWith "input"
+			it "returns the div", ->
+				go()
+				expect(result).toBe element
+			it "appends the input to the div", ->
+				go()
+				expect(element.appendChild).toHaveBeenCalledWith input
+			it "sets the input's \"type\" to \"range\"", ->
+				go()
+				expect(input.type).toEqual "range"
+			it "sets the input's \"min\" to -1", ->
+				go()
+				expect(input.min).toEqual -1
+			it "sets the input's \"max\" to 1", ->
+				go()
+				expect(input.max).toEqual 1
+			it "sets the input's \"step\" to \"any\"", ->
+				go()
+				expect(input.step).toEqual "any"				
+			it "sets the input's \"value\" to the intensity of the entity", ->
+				go()
+				expect(input.value).toEqual 0.7				
+			it "copies the name to an attribute", ->
+				go()
+				expect(element.setAttribute).toHaveBeenCalledWith "name", "test name"
+			it "sets the type attribute to \"gravity\"", ->
+				go()
+				expect(element.setAttribute).toHaveBeenCalledWith "type", "gravity"
+			it "includes a delete handle", ->
+				go()
+				expect(createHandle).toHaveBeenCalledWith element, "delete"
+			it "includes a clone handle", ->
+				go()
+				expect(createHandle).toHaveBeenCalledWith element, "clone"
+			it "sets the class to \"entity\"", ->
+				go()
+				expect(element.className).toEqual "entity"
+			it "sets the tabIndex to 0", ->
+				go()
+				expect(element.tabIndex).toEqual 0
+			it "sets the element up as a falloff", ->
+				go()
+				expect(falloffToElement).toHaveBeenCalledWith "test falloff", element
