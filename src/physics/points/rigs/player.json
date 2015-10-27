@@ -1,14 +1,14 @@
 {
 	"materials": {
 		"person": {
-			"density": 1,
+			"density": 0.01,
 			"friction": 2,
 			"airResistance": 1,
 			"mass": 1,
 			"restitution": 7
 		},
 		"wheel": {
-			"density": 1,
+			"density": 0.1,
 			"friction": 1,
 			"airResistance": 1,
 			"mass": 2,

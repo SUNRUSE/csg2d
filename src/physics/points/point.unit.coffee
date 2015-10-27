@@ -15,8 +15,8 @@ describe "point", ->
 			gravity.and.callFake (location) ->
 				expect(location.x).toEqual 7
 				expect(location.y).toEqual 14
-				x: 1
-				y: -0.375
+				x: 5
+				y: -1.875
 				
 			point.__set__ "normalToNearestSurface", (_distanceField, x, y) ->
 				expect(_distanceField).toBe distanceField
@@ -49,7 +49,7 @@ describe "point", ->
 					x: -6
 					y: -0.5
 				model.material = 
-					density: 0.7
+					density: 0.2
 					airResistance: 2
 					mass: 8
 					friction: 4
@@ -68,7 +68,7 @@ describe "point", ->
 					expect(model.velocity.x).toEqual 1
 					expect(model.velocity.y).toEqual -1.75
 				it "does not modify the material", ->
-					expect(model.material.density).toEqual 0.7
+					expect(model.material.density).toEqual 0.2
 					expect(model.material.airResistance).toEqual 2
 					expect(model.material.mass).toEqual 8
 					expect(model.material.friction).toEqual 4
@@ -91,7 +91,7 @@ describe "point", ->
 					expect(model.velocity.x).toBeCloseTo 0.96
 					expect(model.velocity.y).toBeCloseTo -0.08
 				it "does not modify the material", ->
-					expect(model.material.density).toEqual 0.7
+					expect(model.material.density).toEqual 0.2
 					expect(model.material.airResistance).toEqual 2
 					expect(model.material.mass).toEqual 8
 					expect(model.material.friction).toEqual 4
