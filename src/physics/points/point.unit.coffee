@@ -7,21 +7,29 @@ describe "point", ->
 		it "slippy", -> expect(point.__get__ "slippy").toBe require "./../collision/slippy"
 	
 	describe "on calling", ->
-		distanceField = slippy = model = result = undefined
+		distanceField = gravity = slippy = model = result = undefined
 		beforeEach ->
 			distanceField = jasmine.createSpy "distanceField"
+			gravity = jasmine.createSpy "gravity"
+			gravity.and.callFake (location) ->
+				expect(location.x).toEqual 7
+				expect(location.y).toEqual 14
+				x: 8
+				y: -3
 			
 			slippy = jasmine.createSpy "slippy"
 			point.__set__ "slippy", slippy
 			
 			model = {}
-			result = point distanceField, model 
+			result = point distanceField, gravity, model 
 		it "does not modify the point", ->
 			expect(model).toEqual {}
 		it "returns a function", ->
 			expect(result).toEqual jasmine.any Function
 		it "does not sample the distance field", ->
 			expect(distanceField).not.toHaveBeenCalled()
+		it "does not sample gravity", ->
+			expect(gravity).not.toHaveBeenCalled()
 		it "does not perform any collision", ->
 			expect(slippy).not.toHaveBeenCalled()
 		describe "on calling the returned function", ->
@@ -30,8 +38,8 @@ describe "point", ->
 					x: 7
 					y: 14
 				model.velocity = 
-					x: 2
-					y: -3.5
+					x: -6
+					y: -0.5
 				model.material = 
 					density: 0.7
 					airResistance: 2
@@ -41,7 +49,7 @@ describe "point", ->
 				beforeEach ->
 					slippy.and.returnValue null
 					result()
-				it "sends the position and the position incremented by the velocity divided by the mass to sliding collision", ->
+				it "sends the position and the position incremented by the velocity incremented by gravity divided by the mass to sliding collision", ->
 					expect(slippy.calls.count()).toEqual 1
 					expect(slippy).toHaveBeenCalledWith distanceField, 7, 14, 7.25, 13.5625
 				it "copies the position incremented by the velocity divided by mass to the point's location", ->

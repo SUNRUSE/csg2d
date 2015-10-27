@@ -1,5 +1,6 @@
 # Given:
-# - A distance field function. 
+# - A distance field function.
+# - The function returned by ../falloff/gravity.
 # - An object containing:
 #	- location: Vector specifying the current location of the point.
 #	- velocity: Vector specifying the distance to traverse each point before application of mass.
@@ -11,7 +12,10 @@
 # Returns a function to call to advance the physics of that point by one tick.
 slippy = require "./../collision/slippy"
 
-module.exports = (distanceField, point) -> ->
+module.exports = (distanceField, gravity, point) -> ->
+	gravitySample = gravity point.location
+	point.velocity.x += gravitySample.x
+	point.velocity.y += gravitySample.y
 	newX = point.location.x + point.velocity.x / point.material.mass
 	newY = point.location.y + point.velocity.y / point.material.mass
 	result = slippy distanceField, point.location.x, point.location.y, newX, newY

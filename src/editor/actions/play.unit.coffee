@@ -5,6 +5,7 @@ describe "play", ->
 	
 	describe "imports", ->
 		it "elementsToMap", -> expect(play.__get__ "elementsToMap").toBe require "./../dom/elementsToMap"
+		it "gravity", -> expect(play.__get__ "gravity").toBe require "./../../physics/falloff/gravity"
 		it "mapToDistanceField", -> expect(play.__get__ "mapToDistanceField").toBe require "./../../physics/distanceFields/mapToDistanceField"
 		it "valueOfObject", -> expect(play.__get__ "valueOfObject").toBe require "./../../utilities/random/valueOfObject"
 		
@@ -35,6 +36,10 @@ describe "play", ->
 			play.__set__ "mapToDistanceField", (_map) ->
 				expect(_map).toBe map
 				"test distance field"
+				
+			play.__set__ "gravity", (_map) ->
+				expect(_map).toBe map
+				"test gravity field"
 			
 			preview = 
 				appendChild: jasmine.createSpy "appendChild"
@@ -122,7 +127,7 @@ describe "play", ->
 				offset = 
 					x: 80
 					y: 33
-				expect(loadRig).toHaveBeenCalledWith "test distance field", "test player rig", offset, sceneInstance, jasmine.any Function
+				expect(loadRig).toHaveBeenCalledWith "test distance field", "test gravity field", "test player rig", offset, sceneInstance, jasmine.any Function
 				
 			it "does not end the scene", ->
 				expect(sceneInstance.stop).not.toHaveBeenCalled()
@@ -140,7 +145,7 @@ describe "play", ->
 					element = 
 						style: {}
 					document.createElement.and.returnValue element
-					result = (loadRig.calls.argsFor 0)[4] pointModel
+					result = (loadRig.calls.argsFor 0)[5] pointModel
 				
 				it "creates one new div", ->
 					expect(document.createElement.calls.count()).toEqual 1
@@ -175,12 +180,12 @@ describe "play", ->
 						pointModel.location.y = 11
 						result()
 						
-					it "does not create new divs", ->
-					it "does not append further divs to the viewport", ->
-					it "does not end the scene", ->
-					it "does not load any further player rigs", ->
-					it "does not create further scenes", ->
-					it "does not change the editor mode", ->
-					it "does not show an alert", ->
+					xit "does not create new divs", ->
+					xit "does not append further divs to the viewport", ->
+					xit "does not end the scene", ->
+					xit "does not load any further player rigs", ->
+					xit "does not create further scenes", ->
+					xit "does not change the editor mode", ->
+					xit "does not show an alert", ->
 					it "updates the style to match the point's updated location", ->
 						expect(element.style.transform).toEqual "translate(30rem,11rem)"

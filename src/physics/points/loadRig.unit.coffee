@@ -19,7 +19,7 @@ describe "loadRig", ->
 			pointB = jasmine.createSpy "pointB"
 			pointC = jasmine.createSpy "pointC"
 			pointModelA = pointModelB = pointModelC = undefined
-			point.and.callFake (distanceField, point) -> switch point.location.x
+			point.and.callFake (distanceField, gravity, point) -> switch point.location.x
 				when 19
 					pointModelA = point
 					pointA
@@ -90,11 +90,11 @@ describe "loadRig", ->
 				when pointModelC then updateC
 				else null
 				
-			loadRig "test distance field", rig, offset, scene, create
+			loadRig "test distance field", "test gravity", rig, offset, scene, create
 			
 		it "creates every point once", ->
 			expect(point.calls.count()).toEqual 3
-			expect(point).toHaveBeenCalledWith "test distance field",
+			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
 					x: 19
 					y: 14
@@ -103,7 +103,7 @@ describe "loadRig", ->
 					y: 0
 				material: "test material b"
 				
-			expect(point).toHaveBeenCalledWith "test distance field",
+			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
 					x: 37
 					y: 8
@@ -112,7 +112,7 @@ describe "loadRig", ->
 					y: 0
 				material: "test material a"
 				
-			expect(point).toHaveBeenCalledWith "test distance field",
+			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
 					x: 17
 					y: 19
