@@ -14,8 +14,8 @@ describe "point", ->
 			gravity.and.callFake (location) ->
 				expect(location.x).toEqual 7
 				expect(location.y).toEqual 14
-				x: 8
-				y: -3
+				x: 1
+				y: -0.375
 			
 			slippy = jasmine.createSpy "slippy"
 			point.__set__ "slippy", slippy

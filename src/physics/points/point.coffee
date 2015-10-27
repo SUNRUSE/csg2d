@@ -14,8 +14,8 @@ slippy = require "./../collision/slippy"
 
 module.exports = (distanceField, gravity, point) -> ->
 	gravitySample = gravity point.location
-	point.velocity.x += gravitySample.x
-	point.velocity.y += gravitySample.y
+	point.velocity.x += gravitySample.x * point.material.mass
+	point.velocity.y += gravitySample.y * point.material.mass
 	newX = point.location.x + point.velocity.x / point.material.mass
 	newY = point.location.y + point.velocity.y / point.material.mass
 	result = slippy distanceField, point.location.x, point.location.y, newX, newY
