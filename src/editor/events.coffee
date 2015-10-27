@@ -17,6 +17,7 @@ radius = require "./actions/bounds/radius"
 angle = require "./actions/bounds/angle"
 
 addPlayer = require "./actions/entities/addPlayer"
+addGravity = require "./actions/entities/addGravity"
 
 play = require "./actions/play"
 stop = require "./actions/stop"
@@ -51,6 +52,7 @@ module.exports =
 						when "redo" then history.redo()
 						when "save" then saveFile "map.json", elementsToMap()
 						when "addPlayer" then addPlayer()
+						when "addGravity" then addGravity()
 						else switch element.className
 							when "add" then addShape (element.getAttribute "shape"), (element.getAttribute "operator")
 	start: (element) -> 

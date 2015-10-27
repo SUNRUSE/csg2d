@@ -74,7 +74,7 @@ nav {
 		content: "Pl";
 	}
 	
-	button[class="addEntity"][type="gravity"]:before {
+	button[id="addGravity"]:before {
 		content: "Gr";
 	}
 	
@@ -89,7 +89,7 @@ nav {
 
 [mode="play"] {
 	nav {
-		[id="play"], [class="add"], [id="save"], [id="undo"], [id="redo"], [id="open"], [id="save"], [id="addPlayer"], [class="addEntity"] {
+		[id="play"], [class="add"], [id="save"], [id="undo"], [id="redo"], [id="open"], [id="save"], [id="addPlayer"], [id="addGravity"] {
 			display: none;
 		}
 	}
