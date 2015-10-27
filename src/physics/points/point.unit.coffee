@@ -5,6 +5,7 @@ describe "point", ->
 	
 	describe "imports", ->
 		it "slippy", -> expect(point.__get__ "slippy").toBe require "./../collision/slippy"
+		it "normalToNearestSurface", -> expect(point.__get__ "normalToNearestSurface").toBe require "./../distanceFields/normalToNearestSurface"
 	
 	describe "on calling", ->
 		distanceField = gravity = slippy = model = result = undefined
@@ -16,6 +17,13 @@ describe "point", ->
 				expect(location.y).toEqual 14
 				x: 1
 				y: -0.375
+				
+			point.__set__ "normalToNearestSurface", (_distanceField, x, y) ->
+				expect(_distanceField).toBe distanceField
+				expect(x).toEqual 2
+				expect(y).toEqual 11
+				x: -0.496139
+				y: -0.868243
 			
 			slippy = jasmine.createSpy "slippy"
 			point.__set__ "slippy", slippy
@@ -45,6 +53,7 @@ describe "point", ->
 					airResistance: 2
 					mass: 8
 					friction: 4
+					restitution: 5
 			describe "on not colliding", ->
 				beforeEach ->
 					slippy.and.returnValue null
@@ -63,6 +72,7 @@ describe "point", ->
 					expect(model.material.airResistance).toEqual 2
 					expect(model.material.mass).toEqual 8
 					expect(model.material.friction).toEqual 4
+					expect(model.material.restitution).toEqual 5
 				it "does not sample the distance field", ->
 					expect(distanceField).not.toHaveBeenCalled()
 			describe "on colliding", ->
@@ -77,13 +87,14 @@ describe "point", ->
 				it "copies the resulting location to the point's location", ->
 					expect(model.location.x).toEqual 2
 					expect(model.location.y).toEqual 11
-				it "divides the velocity by the material's friction", ->
-					expect(model.velocity.x).toEqual 0.5
-					expect(model.velocity.y).toEqual -0.875
+				it "reflects the resulting velocity against the surface normal at the point of collision, taking into account friction across the surface and restitution off it", ->
+					expect(model.velocity.x).toBeCloseTo 0.96
+					expect(model.velocity.y).toBeCloseTo -0.08
 				it "does not modify the material", ->
 					expect(model.material.density).toEqual 0.7
 					expect(model.material.airResistance).toEqual 2
 					expect(model.material.mass).toEqual 8
 					expect(model.material.friction).toEqual 4
+					expect(model.material.restitution).toEqual 5
 				it "does not sample the distance field", ->
 					expect(distanceField).not.toHaveBeenCalled()

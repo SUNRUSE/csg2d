@@ -3,14 +3,16 @@
 		"person": {
 			"density": 1,
 			"friction": 2,
-			"airResistance": 1.1,
-			"mass": 1
+			"airResistance": 1,
+			"mass": 1,
+			"restitution": 7
 		},
 		"wheel": {
 			"density": 1,
 			"friction": 1,
 			"airResistance": 1,
-			"mass": 2
+			"mass": 2,
+			"restitution": 2
 		}
 	},
 	"points": {
@@ -40,19 +42,19 @@
 		"frontSlope": {
 			"from": "torso",
 			"to": "frontWheel",
-			"strength": 0.1,
+			"strength": 0.2,
 			"linearity": 1
 		},
 		"backSlope": {
 			"from": "torso",
 			"to": "backWheel",
-			"strength": 0.1,
+			"strength": 0.2,
 			"linearity": 1
 		},
 		"axle": {
 			"from": "backWheel",
 			"to": "frontWheel",
-			"strength": 0.05,
+			"strength": 0.2,
 			"linearity": 1
 		}
 	}

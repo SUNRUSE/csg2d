@@ -37,6 +37,10 @@
                         "type": "number",
                         "minimum": 0,
                         "exclusiveMinimum": true
+                    },
+                    "restitution": {
+                        "type": "number",
+                        "minimum": 1
                     }
                 },
                 "required": ["density", "airResistance", "friction", "mass"]
