@@ -21,4 +21,4 @@ describe "sampleIntensity", ->
 						y: 30
 				it "returns a unit vector pointing along the angle", ->
 					expect(result.x).toBeCloseTo -0.84810003171
-					expect(result.y).toBeCloseTo 0.5298361409
+					expect(result.y).toBeCloseTo -0.5298361409
