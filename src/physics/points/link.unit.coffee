@@ -93,11 +93,11 @@ describe "link", ->
 					# Normal = (6 - 2) / 4.123106, (2 - 1) / 4.123106 = 0.970142412, 0.242535603
 					# Change = 0.970142412 * 0.39819823, 0.242535603 * 0.39819823 = 0.386308991, 0.096577248
 					# Old values: -4, 8 :: 6, -9
-					expect(a.velocity.x).toBeCloseTo -4.386308991
-					expect(a.velocity.y).toBeCloseTo 7.903422752
+					expect(a.velocity.x).toBeCloseTo -3.613691009
+					expect(a.velocity.y).toBeCloseTo 8.096577248
 					
-					expect(b.velocity.x).toBeCloseTo 6.386308991
-					expect(b.velocity.y).toBeCloseTo -8.903422752
+					expect(b.velocity.x).toBeCloseTo 5.613691009
+					expect(b.velocity.y).toBeCloseTo -9.096577248
 				it "does not directly move either point", ->
 					expect(a.location.x).toEqual 6
 					expect(a.location.y).toEqual 2
@@ -115,11 +115,11 @@ describe "link", ->
 					# Normal = (6 - 2) / 4.123106, (2 - 1) / 4.123106 = 0.970142412, 0.242535603
 					# Change = 0.970142412 * 0.39819823, 0.242535603 * 0.39819823 = 0.386308991, 0.096577248
 					# Old values: -4, 8 :: 6, -9
-					expect(a.velocity.x).toBeCloseTo -4.386308991
-					expect(a.velocity.y).toBeCloseTo 7.903422752
+					expect(a.velocity.x).toBeCloseTo -3.613691009
+					expect(a.velocity.y).toBeCloseTo 8.096577248
 					
-					expect(b.velocity.x).toBeCloseTo 6.386308991
-					expect(b.velocity.y).toBeCloseTo -8.903422752
+					expect(b.velocity.x).toBeCloseTo 5.613691009
+					expect(b.velocity.y).toBeCloseTo -9.096577248
 				it "does not directly move either point", ->
 					expect(a.location.x).toEqual 7
 					expect(a.location.y).toEqual 3

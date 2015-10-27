@@ -21,8 +21,8 @@ module.exports = (a, b, strength, linearity) ->
 		diffX /= newDistance  
 		diffY /= newDistance 
 		newDistance -= originalDistance
-		newDistance *= strength
-		newDistance = Math.pow newDistance, linearity
+		newDistance *= strength	
+		newDistance = if newDistance >= 0 then (Math.pow newDistance, linearity) else (-(Math.pow (-newDistance), linearity))
 		diffX *= newDistance
 		diffY *= newDistance
 		a.velocity.x -= diffX
