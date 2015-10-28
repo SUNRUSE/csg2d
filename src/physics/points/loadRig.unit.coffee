@@ -69,12 +69,14 @@ describe "loadRig", ->
 						from: "pointB"
 						to: "pointA"
 						strength: "linkAStrength"
-						linearity: "linkALinearity"
+						linearityScale: "linkALinearityScale"
+						linearityShape: "linkALinearityShape"
 					linkB:
 						from: "pointC"
 						to: "pointB"
 						strength: "linkBStrength"
-						linearity: "linkBLinearity"
+						linearityScale: "linkBLinearityScale"
+						linearityShape: "linkBLinearityShape"
 				
 			offset = 
 				x: 13
@@ -134,8 +136,8 @@ describe "loadRig", ->
 		it "creates every link once", ->
 			expect(link.calls.count()).toEqual 2
 			
-			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "linkAStrength", "linkALinearity"
-			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "linkBStrength", "linkBLinearity"
+			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "linkALinearityScale", "linkALinearityShape", "linkAStrength"
+			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "linkBLinearityScale", "linkBLinearityShape", "linkBStrength"
 			
 		it "does not update the links", ->
 			expect(linkA).not.toHaveBeenCalled()

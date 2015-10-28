@@ -23,4 +23,4 @@ module.exports = (distanceField, gravity, rig, offset, scene, create) ->
 		scene.append point distanceField, gravity, newPoint
 		scene.append create newPoint
 	for name, rigLink of rig.links
-		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rigLink.strength, rigLink.linearity
+		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rigLink.linearityScale, rigLink.linearityShape, rigLink.strength
