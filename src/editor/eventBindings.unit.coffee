@@ -11,11 +11,13 @@ describe "eventBindings", ->
 	describe "imports", ->
 		it "events", ->
 			expect(eventBindings.__get__ "events").toBe require "./events"
+		it "keyUp", -> expect(eventBindings.__get__ "keyUp").toBe require "./../input/keyUp"
+		it "keyDown", -> expect(eventBindings.__get__ "keyDown").toBe require "./../input/keyDown"
 		it "loadFile", ->
 			expect(eventBindings.__get__ "loadFile").toBe require "./io/loadFile"
 			
 	describe "on startup", ->
-		events = loadFile = undefined
+		events = loadFile = keyUp = keyDown = undefined
 		beforeEach ->
 			global.window.innerWidth = 600
 			global.window.innerHeight = 350
@@ -25,6 +27,14 @@ describe "eventBindings", ->
 			
 			events = {}
 			eventBindings.__set__ "events", events
+			
+			keyUp = jasmine.createSpy "keyUp"
+			keyUp.and.callFake -> fail "unexpected keyUp"
+			eventBindings.__set__ "keyUp", keyUp
+			
+			keyDown = jasmine.createSpy "keyDown"
+			keyDown.and.callFake -> fail "unexpected keyDown"
+			eventBindings.__set__ "keyDown", keyDown
 			
 			loadFile = jasmine.createSpy "loadFile"
 			eventBindings.__set__ "loadFile", loadFile
@@ -54,6 +64,10 @@ describe "eventBindings", ->
 				expect(document.ontouchmove).toEqual jasmine.any Function
 			it "listens for document.ontouchend", ->
 				expect(document.ontouchend).toEqual jasmine.any Function
+			it "listens for document.onkeyup", ->
+				expect(document.onkeyup).toEqual jasmine.any Function
+			it "listens for document.onkeydown", ->
+				expect(document.onkeydown).toEqual jasmine.any Function
 			it "sets up loading files", ->
 				expect(loadFile.calls.count()).toEqual 1
 			describe "on mouse down", ->
@@ -100,3 +114,17 @@ describe "eventBindings", ->
 					document.ontouchend {}
 				it "fires the end event", ->
 					expect(events.end.calls.count()).toEqual 1
+			describe "on key up", ->
+				beforeEach ->
+					keyUp.and.stub()
+					document.onkeyup "test event"
+				it "fires the keyUp event", ->
+					expect(keyUp.calls.count()).toEqual 1
+					expect(keyUp).toHaveBeenCalledWith "test event"
+			describe "on key down", ->
+				beforeEach ->
+					keyDown.and.stub()
+					document.onkeydown "test event"
+				it "fires the keyUp event", ->
+					expect(keyDown.calls.count()).toEqual 1
+					expect(keyDown).toHaveBeenCalledWith "test event"
