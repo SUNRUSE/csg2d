@@ -7,6 +7,8 @@ loadRig = require "./../../physics/points/loadRig"
 player = require "./../../physics/points/rigs/player"
 gravity = require "./../../physics/falloff/gravity"
 
+gamepad = require "./../../input/gamepad"
+
 # On calling, switches the editor to "play" mode, spawning a player and removing all editor controls.
 # If no player spawn points exist, an alert is shown and play mode is not entered.
 module.exports = () ->
@@ -24,7 +26,7 @@ module.exports = () ->
 		
 		distanceField = mapToDistanceField map
 		gravityField = gravity map
-		loadRig distanceField, gravityField, player, spawn.origin, instance, (point) ->
+		loadRig distanceField, gravityField, player, spawn.origin, instance, ((point) ->
 			element = document.createElement "div"
 			element.className = "point"
 			
@@ -34,4 +36,4 @@ module.exports = () ->
 			
 			document.getElementById "preview"
 				.appendChild element
-			update
+			update), gamepad

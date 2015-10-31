@@ -13,6 +13,7 @@ describe "play", ->
 		it "loadRig", -> expect(play.__get__ "loadRig").toBe require "./../../physics/points/loadRig"
 		
 		it "player", -> expect(play.__get__ "player").toBe require "./../../physics/points/rigs/player"
+		it "gamepad", -> expect(play.__get__ "gamepad").toBe require "./../../input/gamepad"
 			
 	describe "on calling", ->
 		map = scene = loadRig = valueOfObject = alert = document = preview = undefined
@@ -32,6 +33,8 @@ describe "play", ->
 			play.__set__ "elementsToMap", -> map
 			
 			play.__set__ "player", "test player rig"
+			
+			play.__set__ "gamepad", "test gamepad"
 			
 			play.__set__ "mapToDistanceField", (_map) ->
 				expect(_map).toBe map
@@ -127,7 +130,7 @@ describe "play", ->
 				offset = 
 					x: 80
 					y: 33
-				expect(loadRig).toHaveBeenCalledWith "test distance field", "test gravity field", "test player rig", offset, sceneInstance, jasmine.any Function
+				expect(loadRig).toHaveBeenCalledWith "test distance field", "test gravity field", "test player rig", offset, sceneInstance, (jasmine.any Function), "test gamepad"
 				
 			it "does not end the scene", ->
 				expect(sceneInstance.stop).not.toHaveBeenCalled()
