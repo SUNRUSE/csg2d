@@ -99,6 +99,14 @@
                     "material": {
                         "type": "string",
                         "minLength": 1
+                    },
+                    "controls": {
+                      	"type": "object",
+                        "additionalProperties": {
+                        	"type": "number",
+                            "minimum": 0,
+                            "exclusiveMinimum": true
+                        }
                     }
                 },
                 "required": ["from", "to", "material"]
