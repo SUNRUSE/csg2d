@@ -104,7 +104,7 @@ module.exports = (grunt) ->
                 tasks: ["clean:html", "jade"]
             json:
                 files: ["src/**/*.json"]
-                tasks: ["clean:json", "copy:json", "coffee", "webpack", "uglify"]
+                tasks: ["clean:json", "copy:json", "webpack", "uglify"]
         concurrent:
             buildAndDeploy:
                 options:
