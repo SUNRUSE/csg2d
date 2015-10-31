@@ -1,5 +1,5 @@
 {
-	"materials": {
+	"pointMaterials": {
 		"person": {
 			"density": 0.01,
 			"friction": 2,
@@ -38,27 +38,33 @@
 			"material": "wheel"
 		}
 	},
+	"linkMaterials": {
+		"axle": {
+			"linearityScale": 0.4,
+			"linearityShape": 2,
+			"strength": 20
+		},
+		"leg": {
+			"linearityScale": 0.4,
+			"linearityShape": 2,
+			"strength": 15
+		}
+	},
 	"links": {
 		"frontSlope": {
 			"from": "torso",
 			"to": "frontWheel",
-			"linearityScale": 0.4,
-			"linearityShape": 2,
-			"strength": 15
+			"material": "leg"
 		},
 		"backSlope": {
 			"from": "torso",
 			"to": "backWheel",
-			"linearityScale": 0.4,
-			"linearityShape": 2,
-			"strength": 15
+			"material": "leg"
 		},
 		"axle": {
 			"from": "backWheel",
 			"to": "frontWheel",
-			"linearityScale": 0.4,
-			"linearityShape": 2,
-			"strength": 20
+			"material": "axle"
 		}
 	}
 }

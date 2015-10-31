@@ -17,7 +17,7 @@
         }
     },
 	"properties": {
-		"materials": {
+		"pointMaterials": {
 			"type": "object",
             "additionalProperties": {
                 "type": "object",
@@ -62,19 +62,11 @@
                 "required": ["location", "material"]
             }
 		},
-		"links": {
+		"linkMaterials": {
 			"type": "object",
             "additionalProperties": {
                 "type": "object",
                 "properties": {
-                    "from": {
-                        "type": "string",
-                        "minLength": 1
-                    },
-                    "to": {
-                        "type": "string",
-                        "minLength": 1
-                    },
                     "linearityScale": {
                         "type": "number",
                         "minimum": 0
@@ -88,9 +80,30 @@
                         "minimum": 0
                     }
                 },
-                "required": ["from", "to", "strength", "linearity"]
+                "required": ["linearityScale", "linearityShape", "strength"]
+            }
+		},
+		"links": {
+			"type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "from": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "to": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "material": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": ["from", "to", "material"]
             }
 		}
 	},
-	"required": ["materials", "points", "links"]
+	"required": ["pointMaterials", "points", "linkMaterials", "links"]
 }

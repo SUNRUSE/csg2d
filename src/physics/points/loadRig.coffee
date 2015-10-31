@@ -18,9 +18,9 @@ module.exports = (distanceField, gravity, rig, offset, scene, create) ->
 			velocity:
 				x: 0
 				y: 0
-			material: rig.materials[rigPoint.material]
+			material: rig.pointMaterials[rigPoint.material]
 		createdPoints[name] = newPoint
 		scene.append point distanceField, gravity, newPoint
 		scene.append create newPoint
 	for name, rigLink of rig.links
-		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rigLink.linearityScale, rigLink.linearityShape, rigLink.strength
+		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rig.linkMaterials[rigLink.material]

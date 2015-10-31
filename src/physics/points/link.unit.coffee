@@ -4,7 +4,7 @@ describe "link", ->
 	beforeEach -> link = rewire "./link"
 	
 	describe "on calling", ->
-		a = b = result = undefined
+		a = b = result = material = undefined
 		beforeEach ->
 			a = 
 				location: 
@@ -15,7 +15,13 @@ describe "link", ->
 					x: 2
 					y: 1
 			# Distance: 5.385165
-			result = link a, b, 0.5, 2, 3
+			
+			material = 
+				linearityScale: 0.5
+				linearityShape: 2
+				strength: 3
+			
+			result = link a, b, material
 		it "does not modify either point", ->
 			expect(a).toEqual
 				location:
@@ -25,6 +31,11 @@ describe "link", ->
 				location:
 					x: 2
 					y: 1
+		it "does not modify the material", ->
+			expect(material).toEqual
+				linearityScale: 0.5
+				linearityShape: 2
+				strength: 3
 		it "returns a function", ->
 			expect(result).toEqual jasmine.any Function
 		describe "when calling the result", ->
@@ -47,6 +58,11 @@ describe "link", ->
 					expect(b.location.y).toEqual 1
 					expect(b.velocity.x).toEqual 6
 					expect(b.velocity.y).toEqual -9
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the points move without changing distance", ->
 				beforeEach ->
 					a.location.x = 9
@@ -64,6 +80,11 @@ describe "link", ->
 					expect(b.location.y).toEqual -1
 					expect(b.velocity.x).toEqual 6
 					expect(b.velocity.y).toEqual -9
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the points change orientation without changing distance", ->
 				beforeEach ->
 					a.location.x = 5
@@ -81,6 +102,11 @@ describe "link", ->
 					expect(b.location.y).toEqual 5
 					expect(b.velocity.x).toEqual 6
 					expect(b.velocity.y).toEqual -9
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the first point moves closer to the second point", ->
 				beforeEach ->
 					a.location.x = 6
@@ -104,6 +130,11 @@ describe "link", ->
 					expect(a.location.y).toEqual 2
 					expect(b.location.x).toEqual 2
 					expect(b.location.y).toEqual 1
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the second point moves closer to the first point", ->
 				beforeEach ->
 					b.location.x = 3
@@ -127,6 +158,11 @@ describe "link", ->
 					expect(a.location.y).toEqual 3
 					expect(b.location.x).toEqual 3
 					expect(b.location.y).toEqual 2
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the first point moves away from the second point", ->
 				beforeEach ->
 					a.location.x = 10
@@ -150,6 +186,11 @@ describe "link", ->
 					expect(a.location.y).toEqual 2
 					expect(b.location.x).toEqual 2
 					expect(b.location.y).toEqual 1
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3
 			describe "when the second point moves away from the first point", ->
 				beforeEach ->
 					b.location.x = -1
@@ -173,3 +214,8 @@ describe "link", ->
 					expect(a.location.y).toEqual 3
 					expect(b.location.x).toEqual -1
 					expect(b.location.y).toEqual 2
+				it "does not modify the material", ->
+					expect(material).toEqual
+						linearityScale: 0.5
+						linearityShape: 2
+						strength: 3

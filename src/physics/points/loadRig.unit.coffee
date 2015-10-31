@@ -45,9 +45,9 @@ describe "loadRig", ->
 				append: jasmine.createSpy "append"
 				
 			rig = 
-				materials:
-					materialA: "test material a"
-					materialB: "test material b"
+				pointMaterials:
+					materialA: "test point material a"
+					materialB: "test point material b"
 				points:
 					pointA:
 						location:
@@ -64,19 +64,19 @@ describe "loadRig", ->
 							x: 4
 							y: 23
 						material: "materialB"
+				linkMaterials:
+					materialA: "test link material a"
+					materialB: "test link material b"
+					materialC: "test link material c"
 				links:
 					linkA:
 						from: "pointB"
 						to: "pointA"
-						strength: "linkAStrength"
-						linearityScale: "linkALinearityScale"
-						linearityShape: "linkALinearityShape"
+						material: "materialC"
 					linkB:
 						from: "pointC"
 						to: "pointB"
-						strength: "linkBStrength"
-						linearityScale: "linkBLinearityScale"
-						linearityShape: "linkBLinearityShape"
+						material: "materialB"
 				
 			offset = 
 				x: 13
@@ -103,7 +103,7 @@ describe "loadRig", ->
 				velocity:
 					x: 0
 					y: 0
-				material: "test material b"
+				material: "test point material b"
 				
 			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
@@ -112,7 +112,7 @@ describe "loadRig", ->
 				velocity:
 					x: 0
 					y: 0
-				material: "test material a"
+				material: "test point material a"
 				
 			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
@@ -121,7 +121,7 @@ describe "loadRig", ->
 				velocity:
 					x: 0
 					y: 0
-				material: "test material b"
+				material: "test point material b"
 				
 		it "creates distinct point models", ->
 			expect(pointModelA).not.toBe pointModelB
@@ -136,8 +136,8 @@ describe "loadRig", ->
 		it "creates every link once", ->
 			expect(link.calls.count()).toEqual 2
 			
-			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "linkALinearityScale", "linkALinearityShape", "linkAStrength"
-			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "linkBLinearityScale", "linkBLinearityShape", "linkBStrength"
+			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "test link material c"
+			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "test link material b"
 			
 		it "does not update the links", ->
 			expect(linkA).not.toHaveBeenCalled()
