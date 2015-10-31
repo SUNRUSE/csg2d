@@ -73,11 +73,12 @@ describe "loadRig", ->
 						from: "pointB"
 						to: "pointA"
 						material: "materialC"
+						controls: "test controls a"
 					linkB:
 						from: "pointC"
 						to: "pointB"
 						material: "materialB"
-				
+						controls: "test controls b"
 			offset = 
 				x: 13
 				y: -4
@@ -92,7 +93,7 @@ describe "loadRig", ->
 				when pointModelC then updateC
 				else null
 				
-			loadRig "test distance field", "test gravity", rig, offset, scene, create
+			loadRig "test distance field", "test gravity", rig, offset, scene, create, "test gamepad"
 			
 		it "creates every point once", ->
 			expect(point.calls.count()).toEqual 3
@@ -136,8 +137,8 @@ describe "loadRig", ->
 		it "creates every link once", ->
 			expect(link.calls.count()).toEqual 2
 			
-			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "test link material c"
-			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "test link material b"
+			expect(link).toHaveBeenCalledWith pointModelB, pointModelA, "test link material c", "test gamepad", "test controls a"
+			expect(link).toHaveBeenCalledWith pointModelC, pointModelB, "test link material b", "test gamepad", "test controls b"
 			
 		it "does not update the links", ->
 			expect(linkA).not.toHaveBeenCalled()

@@ -8,7 +8,9 @@ link = require "./link"
 # - A vector specifying an offset.  This is added to each point's location.
 # - The object returned by "scene".
 # - A function called for every point.  This is given the point object created and the returned function will be called after every update of the point's location.
-module.exports = (distanceField, gravity, rig, offset, scene, create) ->
+# - Null, or an object equivalent to the ./../../input/gamepad object to control the tension of links in the rig.
+module.exports = (distanceField, gravity, rig, offset, scene, create, gamepad) ->
+	if window then window.rig = rig
 	createdPoints = {}
 	for name, rigPoint of rig.points
 		newPoint = 
@@ -23,4 +25,4 @@ module.exports = (distanceField, gravity, rig, offset, scene, create) ->
 		scene.append point distanceField, gravity, newPoint
 		scene.append create newPoint
 	for name, rigLink of rig.links
-		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rig.linkMaterials[rigLink.material]
+		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rig.linkMaterials[rigLink.material], gamepad, rigLink.controls
