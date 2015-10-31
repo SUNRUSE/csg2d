@@ -8,6 +8,7 @@ module.exports = (grunt) ->
         "grunt-contrib-sass"
         "grunt-contrib-watch"
         "grunt-contrib-uglify"
+        "grunt-concurrent"
         "grunt-webpack"
         "grunt-contrib-cssmin"
         "grunt-jasmine-nodejs"
@@ -15,19 +16,12 @@ module.exports = (grunt) ->
     
     grunt.initConfig
         copy:
-            build:
+            json:
                 files: [
                     expand: true
                     cwd: "src"
                     src: ["**/*.json"]
                     dest: "build"
-                ]
-            deploy: 
-                files: [
-                    expand: true
-                    cwd: "build"
-                    src: ["**/min.js", "**/min.css", "**/*.html"]
-                    dest: "deploy"
                 ]
         coffee:
             options:
@@ -51,7 +45,7 @@ module.exports = (grunt) ->
                 expand: true
                 cwd: "src"
                 src: ["**/**.jade"]
-                dest: "build"
+                dest: "deploy"
                 ext: ".html"
         sass:
             build:
@@ -74,14 +68,16 @@ module.exports = (grunt) ->
         uglify:
             build:
                 files:
-                    "build/editor/min.js": "build/editor/packed.js"     
+                    "deploy/editor/min.js": "build/editor/packed.js"     
         cssmin:
             editor:
                 files:
-                    "build/editor/min.css": ["build/*.css", "build/editor/**/*.css"]
+                    "deploy/editor/min.css": ["build/*.css", "build/editor/**/*.css"]
         clean:
-            build: "build"
-            deploy: "deploy"
+            js: "build/**/*.js"
+            json: "build/**/*.json"
+            css: ["build/**/*.css", "build/**/*.css.map"]
+            html: ["build/**/*.html"]
         jasmine_nodejs:
             unit:
                 options:
@@ -91,10 +87,31 @@ module.exports = (grunt) ->
                             verbosity: 2
                 specs: ["build/**"]
         watch:
-            options:
-                atBegin: true
-            files: ["src/**/*"],
-            tasks: ["build", "deploy"]
-    
-    grunt.registerTask "build", ["clean:build", "copy:build", "coffee", "jasmine_nodejs", "jade", "sass", "webpack", "uglify", "cssmin"]
-    grunt.registerTask "deploy", ["clean:deploy", "copy:deploy"]
+            js:
+                options:
+                    atBegin: true
+                files: ["src/**/*.coffee"],
+                tasks: ["clean:js", "coffee", "jasmine_nodejs", "webpack", "uglify"]
+            css:
+                options:
+                    atBegin: true
+                files: ["src/**/*.scss"]
+                tasks: ["clean:css", "sass", "cssmin"]
+            html:
+                options:
+                    atBegin: true
+                files: ["src/**/*.jade"]
+                tasks: ["clean:html", "jade"]
+            json:
+                files: ["src/**/*.json"]
+                tasks: ["clean:json", "copy:json", "coffee", "webpack", "uglify"]
+        concurrent:
+            buildAndDeploy:
+                options:
+                    logConcurrentOutput: true
+                tasks: [
+                    "watch:js"
+                    "watch:css"
+                    "watch:html"
+                    "watch:json"
+                ]
