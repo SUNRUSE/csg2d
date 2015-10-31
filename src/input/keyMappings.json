@@ -1,3 +1,4 @@
 {
-	"90": "crouch"
+	"90": "leanLeft",
+	"88": "leanRight"
 }
