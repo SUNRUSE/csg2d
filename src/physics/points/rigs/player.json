@@ -12,7 +12,7 @@
 			"friction": 1,
 			"airResistance": 1,
 			"mass": 2,
-			"restitution": 2
+			"restitution": 40
 		}
 	},
 	"points": {
@@ -40,26 +40,32 @@
 	},
 	"linkMaterials": {
 		"axle": {
-			"linearityScale": 0.4,
-			"linearityShape": 2,
-			"strength": 20
+			"linearityScale": 2,
+			"linearityShape": 0.8,
+			"strength": 0.5
 		},
 		"leg": {
-			"linearityScale": 0.4,
-			"linearityShape": 2,
-			"strength": 15
+			"linearityScale": 2,
+			"linearityShape": 0.8,
+			"strength": 0.5
 		}
 	},
 	"links": {
 		"frontSlope": {
 			"from": "torso",
 			"to": "frontWheel",
-			"material": "leg"
+			"material": "leg",
+			"controls": {
+				"leanLeft": 1.12
+			}
 		},
 		"backSlope": {
 			"from": "torso",
 			"to": "backWheel",
-			"material": "leg"
+			"material": "leg",
+			"controls": {
+				"leanRight": 1.12
+			}
 		},
 		"axle": {
 			"from": "backWheel",
