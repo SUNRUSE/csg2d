@@ -1,14 +1,14 @@
 {
 	"pointMaterials": {
 		"person": {
-			"density": 0.01,
-			"friction": 2,
-			"airResistance": 1,
-			"mass": 2,
-			"restitution": 7
+			"density": 0.0125,
+			"friction": 1,
+			"airResistance": 1.015,
+			"mass": 0.02,
+			"restitution": 1.5
 		},
 		"wheel": {
-			"density": 0.1,
+			"density": 0.025,
 			"friction": 1,
 			"airResistance": 1,
 			"mass": 2,
@@ -19,20 +19,34 @@
 		"torso": {
 			"location": {
 				"x": 0,
-				"y": 0
+				"y": -5
+			},
+			"material": "person"
+		},
+		"leftHand": {
+			"location": {
+				"x": -3,
+				"y": -1.5
+			},
+			"material": "person"
+		},
+		"rightHand": {
+			"location": {
+				"x": 3,
+				"y": -1.5
 			},
 			"material": "person"
 		},
 		"backWheel": {
 			"location": {
-				"x": -2,
+				"x": -3,
 				"y": 2
 			},
 			"material": "wheel"
 		},
 		"frontWheel": {
 			"location": {
-				"x": 2,
+				"x": 3,
 				"y": 2
 			},
 			"material": "wheel"
@@ -40,14 +54,24 @@
 	},
 	"linkMaterials": {
 		"axle": {
-			"linearityScale": 2,
-			"linearityShape": 0.8,
-			"strength": 0.5
+			"linearityScale": 0.8,
+			"linearityShape": 2,
+			"strength": 0.7
 		},
 		"leg": {
-			"linearityScale": 2,
-			"linearityShape": 0.8,
-			"strength": 0.5
+			"linearityScale": 0.5,
+			"linearityShape": 2,
+			"strength": 0.001
+		},
+		"loose": {
+			"linearityScale": 1,
+			"linearityShape": 1,
+			"strength": 0.001
+		},
+		"looser": {
+			"linearityScale": 1,
+			"linearityShape": 1,
+			"strength": 0.0005
 		}
 	},
 	"links": {
@@ -56,7 +80,7 @@
 			"to": "frontWheel",
 			"material": "leg",
 			"controls": {
-				"leanLeft": 1.12
+				"leanRight": 1.15
 			}
 		},
 		"backSlope": {
@@ -64,8 +88,29 @@
 			"to": "backWheel",
 			"material": "leg",
 			"controls": {
-				"leanRight": 1.12
+				"leanLeft": 1.15
 			}
+		},
+		"leftArm": {
+			"from": "torso",
+			"to": "leftHand",
+			"material": "loose",
+			"controls": {
+				"leanLeft": 1.17
+			}
+		},
+		"rightArm": {
+			"from": "torso",
+			"to": "rightHand",
+			"material": "loose",
+			"controls": {
+				"leanRight": 1.17
+			}
+		},
+		"armSpan": {
+			"from": "rightHand",
+			"to": "leftHand",
+			"material": "looser"
 		},
 		"axle": {
 			"from": "backWheel",

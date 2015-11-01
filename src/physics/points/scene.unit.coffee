@@ -30,7 +30,7 @@ describe "scene", ->
 					result = scene()
 				it "sets up an interval", ->
 					expect(setInterval.calls.count()).toEqual 1
-					expect(setInterval).toHaveBeenCalledWith (jasmine.any Function), 33.33333333333333333
+					expect(setInterval).toHaveBeenCalledWith (jasmine.any Function), 16.6666666666666666666
 				it "does not clear an interval", ->
 					expect(clearInterval).not.toHaveBeenCalled()
 				it "returns an object", ->

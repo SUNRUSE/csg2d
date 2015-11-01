@@ -6,7 +6,7 @@
 # - stop: A function which stops the update loop entirely.
 module.exports = ->
 	toDo = ->
-	clearId = setInterval (-> if (document.body.getAttribute "mode") is "play" then toDo()), 1000/30
+	clearId = setInterval (-> if (document.body.getAttribute "mode") is "play" then toDo()), 1000/60
 	unused =
 		append: (callback) ->
 			toWrap = toDo
