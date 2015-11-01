@@ -32,7 +32,7 @@ module.exports = (a, b, material, gamepad, tensions) ->
 				if gamepad[key] then scaledDistance /= value
 		newDistance -= scaledDistance
 		newDistance *= material.linearityScale	
-		newDistance = if newDistance >= 0 then (Math.pow newDistance, material.linearityShape) else (-(Math.pow (-newDistance), material.linearityShape))
+		newDistance = if newDistance >= 0 then ((Math.pow (newDistance + 1), material.linearityShape) - 1) else (-((Math.pow ((-newDistance) + 1), material.linearityShape) - 1))
 		newDistance *= material.strength
 		diffX *= newDistance
 		diffY *= newDistance

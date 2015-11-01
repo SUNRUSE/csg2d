@@ -121,16 +121,16 @@ describe "link", ->
 					extraTests()
 					it "the points accelerate away from one another", ->
 						# Difference: 5.385165 - 4.123106 = 1.262059
-						# Apply delinearization: (1.262059 * 0.5) ^ 2.0 = 0.39819823 
-						# Apply strength: 0.39819823 * 3 = 1.19459469
+						# Apply delinearization: (((1.262059 * 0.5) + 1.0) ^ 2.0) - 1.0 = 1.66025723
+						# Apply strength: 0.39819823 * 3 = 4.98077169
 						# Normal = (6 - 2) / 4.123106, (2 - 1) / 4.123106 = 0.970142412, 0.242535603
-						# Change = 0.970142412 * 1.19459469, 0.242535603 * 1.19459469 = 1.158926974, 0.289731743
+						# Change = 0.970142412 * 4.98077169, 0.242535603 * 4.98077169 = 4.832057861, 1.208014465
 						# Old values: -4, 8 :: 6, -9
-						expect(a.velocity.x).toBeCloseTo -2.841073026
-						expect(a.velocity.y).toBeCloseTo 8.289731743
+						expect(a.velocity.x).toBeCloseTo 0.832057861
+						expect(a.velocity.y).toBeCloseTo 9.208014465
 						
-						expect(b.velocity.x).toBeCloseTo 4.841073026
-						expect(b.velocity.y).toBeCloseTo -9.289731743
+						expect(b.velocity.x).toBeCloseTo 1.167942139
+						expect(b.velocity.y).toBeCloseTo -10.208014465
 					it "does not directly move either point", ->
 						expect(a.location.x).toEqual 6
 						expect(a.location.y).toEqual 2
@@ -150,16 +150,16 @@ describe "link", ->
 					extraTests()
 					it "the points accelerate away from one another", ->
 						# Difference: 5.385165 - 4.123106 = 1.262059
-						# Apply delinearization: (1.262059 * 0.5) ^ 2.0 = 0.39819823 
-						# Apply strength: 0.39819823 * 3 = 1.19459469
+						# Apply delinearization: (((1.262059 * 0.5) + 1.0) ^ 2.0) - 1.0 = 1.66025723
+						# Apply strength: 0.39819823 * 3 = 4.98077169
 						# Normal = (6 - 2) / 4.123106, (2 - 1) / 4.123106 = 0.970142412, 0.242535603
-						# Change = 0.970142412 * 1.19459469, 0.242535603 * 1.19459469 = 1.158926974, 0.289731743
+						# Change = 0.970142412 * 4.98077169, 0.242535603 * 4.98077169 = 4.832057861, 1.208014465
 						# Old values: -4, 8 :: 6, -9
-						expect(a.velocity.x).toBeCloseTo -2.841073026
-						expect(a.velocity.y).toBeCloseTo 8.289731743
+						expect(a.velocity.x).toBeCloseTo 0.832057861
+						expect(a.velocity.y).toBeCloseTo 9.208014465
 						
-						expect(b.velocity.x).toBeCloseTo 4.841073026
-						expect(b.velocity.y).toBeCloseTo -9.289731743
+						expect(b.velocity.x).toBeCloseTo 1.167942139
+						expect(b.velocity.y).toBeCloseTo -10.208014465
 					it "does not directly move either point", ->
 						expect(a.location.x).toEqual 7
 						expect(a.location.y).toEqual 3
@@ -179,16 +179,16 @@ describe "link", ->
 					extraTests()
 					it "the points accelerate towards one another", ->
 						# Difference: 5.385165 - 8.062258 = -2.677093
-						# Delinearized: (-2.677093 * 0.5) ^ 2.0 = 1.791706733
-						# With strength: 1.791706733 * 3 = 5.375120199
+						# Delinearized: (((-2.677093 * 0.5) - 1.0) ^ 2.0) - 1.0 = 4.468799733
+						# With strength: 4.468799733 * 3 = 13.406399198
 						# Normal = (7 - -1) / 8.062258, (2 - 3) / 8.062258 = 0.992277846, -0.124034731
-						# Change = 0.992277846 * 5.375120199, -0.124034731 * 5.375120199 = 5.333612693, -0.666701588
+						# Change = 0.992277846 * 13.406399198, -0.124034731 * 13.406399198 = 13.302872919, −1.662859118
 						# Old values: -4, 8 :: 6, -9
-						expect(a.velocity.x).toBeCloseTo -9.333612693
-						expect(a.velocity.y).toBeCloseTo 7.333298412
+						expect(a.velocity.x).toBeCloseTo -17.302872919
+						expect(a.velocity.y).toBeCloseTo 6.337140882
 						
-						expect(b.velocity.x).toBeCloseTo 11.333612693
-						expect(b.velocity.y).toBeCloseTo -8.333298412
+						expect(b.velocity.x).toBeCloseTo 19.302872919
+						expect(b.velocity.y).toBeCloseTo -7.337140882
 					it "does not directly move either point", ->
 						expect(a.location.x).toEqual 10
 						expect(a.location.y).toEqual 2
@@ -208,16 +208,16 @@ describe "link", ->
 					extraTests()
 					it "the points accelerate towards one another", ->
 						# Difference: 5.385165 - 8.062258 = -2.677093
-						# Delinearized: (-2.677093 * 0.5) ^ 2.0 = 1.791706733
-						# With strength: 1.791706733 * 3 = 5.375120199
+						# Delinearized: (((-2.677093 * 0.5) - 1.0) ^ 2.0) - 1.0 = 4.468799733
+						# With strength: 4.468799733 * 3 = 13.406399198
 						# Normal = (7 - -1) / 8.062258, (2 - 3) / 8.062258 = 0.992277846, -0.124034731
-						# Change = 0.992277846 * 5.375120199, -0.124034731 * 5.375120199 = 5.333612693, -0.666701588
+						# Change = 0.992277846 * 13.406399198, -0.124034731 * 13.406399198 = 13.302872919, −1.662859118
 						# Old values: -4, 8 :: 6, -9
-						expect(a.velocity.x).toBeCloseTo -9.333612693
-						expect(a.velocity.y).toBeCloseTo 7.333298412
+						expect(a.velocity.x).toBeCloseTo -17.302872919
+						expect(a.velocity.y).toBeCloseTo 6.337140882
 						
-						expect(b.velocity.x).toBeCloseTo 11.333612693
-						expect(b.velocity.y).toBeCloseTo -8.333298412
+						expect(b.velocity.x).toBeCloseTo 19.302872919
+						expect(b.velocity.y).toBeCloseTo -7.337140882
 					it "does not directly move either point", ->
 						expect(a.location.x).toEqual 7
 						expect(a.location.y).toEqual 3
@@ -357,17 +357,17 @@ describe "link", ->
 						# Actual distance: 5.385165
 						# Adjusted target distance: 5.385165 * 0.6 * 0.2 = 0.6462198
 						# Distance difference = 0.6462198 - 5.385165 = 4.7389452
-						# Delinearized: (4.7389452 * 0.5) ^ 2.0 = 5.614400402
-						# With strength: 5.614400402 * 3 = 16.843201206
+						# Delinearized: (((4.7389452 * 0.5) + 1.0) ^ 2.0) - 1.0 = 10.353345602
+						# With strength: 10.353345602 * 3 = 31.060036806
 						# Difference = 2 - 7, 1 - 3 = -5, -2
 						# Normalized = -5 / 5.385165, -2 / 5.385165 = -0.928476658, -0.371390663
-						# Velocity change = -0.928476658 * 16.843201206, -0.371390663 * 16.843201206 = −15.638519166, −6.255407663
+						# Velocity change = -0.928476658 * 31.060036806, -0.371390663 * 31.060036806 = -28.838519171, -11.535407662
 						# Old values: -4, 8 :: 6, -9
-						expect(a.velocity.x).toBeCloseTo -19.638519166
-						expect(a.velocity.y).toBeCloseTo 1.744592337
+						expect(a.velocity.x).toBeCloseTo -32.838519171
+						expect(a.velocity.y).toBeCloseTo -3.535407662
 						
-						expect(b.velocity.x).toBeCloseTo 21.638519166
-						expect(b.velocity.y).toBeCloseTo -2.744592337
+						expect(b.velocity.x).toBeCloseTo 34.838519171
+						expect(b.velocity.y).toBeCloseTo 2.535407662
 					it "does not directly move either point", ->
 						expect(a.location.x).toEqual 7
 						expect(a.location.y).toEqual 3
