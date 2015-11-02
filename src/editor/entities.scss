@@ -56,3 +56,7 @@
 .entity[type="gravity"] input[type="range"] {
 	width: 100%;
 }
+
+body:not([mode="edit"]) .entity {
+	display: none;
+}

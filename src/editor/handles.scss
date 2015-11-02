@@ -119,3 +119,7 @@
 .handle[kind="pullForward"]::after {
 	content: "\2398";
 }
+
+body:not([mode="edit"]) .handle {
+	display: none;
+}
