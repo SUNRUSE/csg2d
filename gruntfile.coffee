@@ -91,7 +91,7 @@ module.exports = (grunt) ->
                 options:
                     atBegin: true
                 files: ["src/**/*.coffee"],
-                tasks: ["clean:js", "coffee", "jasmine_nodejs", "webpack", "uglify"]
+                tasks: ["clean:json", "copy:json", "clean:js", "coffee", "jasmine_nodejs", "webpack", "uglify"]
             css:
                 options:
                     atBegin: true
