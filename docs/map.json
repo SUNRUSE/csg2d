@@ -113,6 +113,9 @@
                                 "height": {
                                     "type": "integer",
                                     "minimum": 1
+                                },
+                                "ramp": {
+                                    "enum": ["topLeft", "topRight", "bottomRight", "bottomLeft"]
                                 }
                             },
                             "required": ["left", "top", "width", "height"]
