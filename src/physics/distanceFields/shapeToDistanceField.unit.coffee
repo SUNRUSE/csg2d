@@ -48,3 +48,115 @@ describe "shapeToDistanceField", ->
 			expect(square 5.5, 14.5).toBeCloseTo -0.5
 		it "returns the inverse of the distance to the bottom wall when inside it", ->
 			expect(square 5, 8.5).toBeCloseTo -1.5
+	describe "ramp", ->
+		describe "top left", ->
+			ramp = undefined
+			beforeEach ->
+				ramp = shapeToDistanceField
+					left: 3
+					width: 8
+					top: 6
+					height: 4
+					ramp: "topLeft"
+			it "returns the distance to the left side when beyond it", ->
+				expect(ramp 2.5, 8).toBeCloseTo 0.5
+			it "returns the distance to the top side when beyond it", ->
+				expect(ramp 6, 4).toBeCloseTo 2
+			it "returns the distance to the diagonal side when beyond it", ->
+				expect(ramp 9.5, 10.5).toBeCloseTo 3.35
+			it "returns the inverse of the distance to the left side when inside it", ->
+				expect(ramp 3.25, 8).toBeCloseTo -0.25
+			it "returns the inverse of the distance to the top side when inside it", ->
+				expect(ramp 6, 7).toBeCloseTo -1
+			it "returns the inverse of the distance to the diagonal side when inside it", ->
+				expect(ramp 5.5, 7.5).toBeCloseTo -1.118
+			it "returns the distance to the top left corner when beyond it", ->
+				expect(ramp 2.59, 10.8).toBeCloseTo 0.899
+			it "returns the distance to the bottom left corner when beyond it", ->
+				expect(ramp 2.53, 4.84).toBeCloseTo 1.251
+			it "returns the distance to the top right corner when beyond it", ->
+				expect(ramp 12.06, 5.578).toBeCloseTo 1.139
+		describe "top right", ->
+			ramp = undefined
+			beforeEach ->
+				ramp = shapeToDistanceField
+					left: 3
+					width: 8
+					top: 6
+					height: 4
+					ramp: "topRight"
+			it "returns the distance to the right side when beyond it", ->
+				expect(ramp 11.5, 8).toBeCloseTo 0.5
+			it "returns the distance to the top side when beyond it", ->
+				expect(ramp 6, 4).toBeCloseTo 2
+			it "returns the distance to the diagonal side when beyond it", ->
+				expect(ramp 9, 10).toBeCloseTo 0.894
+			it "returns the inverse of the distance to the right side when inside it", ->
+				expect(ramp 9.25, 8.5).toBeCloseTo -0.559
+			it "returns the inverse of the distance to the top side when inside it", ->
+				expect(ramp 6, 6.5).toBeCloseTo -0.5
+			it "returns the inverse of the distance to the diagonal side when inside it", ->
+				expect(ramp 10.75, 8.5).toBeCloseTo -0.25
+			it "returns the distance to the top right corner when beyond it", ->
+				expect(ramp 12.06, 5.578).toBeCloseTo 1.139
+				expect(ramp 11.386, 5.08).toBeCloseTo 0.998
+			it "returns the distance to the bottom right corner when beyond it", ->
+				expect(ramp 11.66395, 10.27325).toBeCloseTo 0.72
+			it "returns the distance to the top left corner when beyond it", ->
+				expect(ramp 2.59, 5.53553).toBeCloseTo 0.623
+		describe "bottom left", ->
+			ramp = undefined
+			beforeEach ->
+				ramp = shapeToDistanceField
+					left: 3
+					width: 8
+					top: 6
+					height: 4
+					ramp: "bottomLeft"
+			it "returns the distance to the left side when beyond it", ->
+				expect(ramp 2.5, 8).toBeCloseTo 0.5
+			it "returns the distance to the bottom side when beyond it", ->
+				expect(ramp 6, 12).toBeCloseTo 2
+			it "returns the distance to the diagonal side when beyond it", ->
+				expect(ramp 6.5, 6.5).toBeCloseTo 1.12
+			it "returns the inverse of the distance to the left side when inside it", ->
+				expect(ramp 3.25, 8).toBeCloseTo -0.25
+			it "returns the inverse of the distance to the bottom side when inside it", ->
+				expect(ramp 6, 9).toBeCloseTo -1
+			it "returns the inverse of the distance to the diagonal side when inside it", ->
+				expect(ramp 5.5, 8.5).toBeCloseTo -1.12
+			it "returns the distance to the bottom left corner when beyond it", ->
+				expect(ramp 2.53, 4.84).toBeCloseTo 1.251
+			it "returns the distance to the top left corner when beyond it", ->
+				expect(ramp 2.59, 10.8).toBeCloseTo 0.899
+			it "returns the distance to the bottom right corner when beyond it", ->
+				expect(ramp 11.62, 10.69).toBeCloseTo 0.931
+		describe "bottom right", ->
+			ramp = undefined
+			beforeEach ->
+				ramp = shapeToDistanceField
+					left: 3
+					width: 8
+					top: 6
+					height: 4
+					ramp: "bottomRight"
+			it "returns the distance to the right side when beyond it", ->
+				expect(ramp 11.5, 8).toBeCloseTo 0.5
+			it "returns the distance to the bottom side when beyond it", ->
+				expect(ramp 6, 12).toBeCloseTo 2
+			it "returns the distance to the diagonal side when beyond it", ->
+				expect(ramp 6, 6).toBeCloseTo 2.236
+			it "returns the inverse of the distance to the right side when inside it", ->
+				expect(ramp 10.5, 8).toBeCloseTo -0.5
+			it "returns the inverse of the distance to the bottom side when inside it", ->
+				expect(ramp 6, 9.5).toBeCloseTo -0.5
+			it "returns the inverse of the distance to the diagonal side when inside it", ->
+				expect(ramp 7.25, 8.5).toBeCloseTo -0.559
+			it "returns the distance to the bottom right corner when beyond it", ->
+				expect(ramp 11.62, 10.69).toBeCloseTo 0.931
+			it "returns the distance to the top right corner when beyond it", ->
+				expect(ramp 12.06, 5.578).toBeCloseTo 1.139
+				expect(ramp 11.386, 5.08).toBeCloseTo 0.998
+			it "returns the distance to the bottom left corner when beyond it", ->
+				expect(ramp 2.3, 9.66).toBeCloseTo 0.78
+				expect(ramp 2.82, 10.83).toBeCloseTo 0.85
