@@ -23,6 +23,13 @@ module.exports = (grunt) ->
                     src: ["**/*.json"]
                     dest: "build"
                 ]
+            static:
+                files: [
+                    expand: true
+                    cwd: "src"
+                    src: ["**/*.png"]
+                    dest: "deploy"
+                ]
         coffee:
             options:
                 bare: true
@@ -78,6 +85,7 @@ module.exports = (grunt) ->
             json: "build/**/*.json"
             css: ["build/**/*.css", "build/**/*.css.map"]
             html: ["build/**/*.html"]
+            static: ["deploy/**/*.png"]
         jasmine_nodejs:
             unit:
                 options:
@@ -105,6 +113,11 @@ module.exports = (grunt) ->
             json:
                 files: ["src/**/*.json"]
                 tasks: ["clean:json", "copy:json", "webpack", "uglify"]
+            static:
+                options:
+                    atBegin: true
+                files: ["src/**/*.png"]
+                tasks: ["clean:static", "copy:static"]
         concurrent:
             buildAndDeploy:
                 options:
@@ -114,4 +127,5 @@ module.exports = (grunt) ->
                     "watch:css"
                     "watch:html"
                     "watch:json"
+                    "watch:static"
                 ]

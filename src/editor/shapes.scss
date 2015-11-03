@@ -43,3 +43,42 @@
 .shape[shape="circle"], .shape[shape="circle"]::after {
 	border-radius: 50%;
 }
+.shape[shape="ramp"][position="bottomLeft"][operator="subtract"] {
+	background: url("rampBottomLeftSubtract.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="topLeft"][operator="subtract"] {
+	background: url("rampTopLeftSubtract.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="bottomRight"][operator="subtract"] {
+	background: url("rampBottomRightSubtract.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="topRight"][operator="subtract"] {
+	background: url("rampTopRightSubtract.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="bottomLeft"][operator="add"] {
+	background: url("rampBottomLeftAdd.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="topLeft"][operator="add"] {
+	background: url("rampTopLeftAdd.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="bottomRight"][operator="add"] {
+	background: url("rampBottomRightAdd.png");
+	background-size: 100% 100%;
+}
+
+.shape[shape="ramp"][position="topRight"][operator="add"] {
+	background: url("rampTopRightAdd.png");
+	background-size: 100% 100%;
+}
