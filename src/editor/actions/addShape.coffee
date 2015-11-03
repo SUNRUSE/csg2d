@@ -19,4 +19,10 @@ module.exports = (shape, operator) ->
 				left: Math.round((window.pageXOffset + (window.innerWidth / 4)) / pixelsPerRem)
 				top: Math.round((window.pageYOffset + (window.innerHeight / 4)) / pixelsPerRem)
 				width: Math.max(1, Math.round((window.innerWidth / 2) / pixelsPerRem))
-				height: Math.max(1, Math.round((window.innerHeight / 2) / pixelsPerRem))), "shapes"
+				height: Math.max(1, Math.round((window.innerHeight / 2) / pixelsPerRem))
+			when "ramp"
+				left: Math.round((window.pageXOffset + (window.innerWidth / 4)) / pixelsPerRem)
+				top: Math.round((window.pageYOffset + (window.innerHeight / 4)) / pixelsPerRem)
+				width: Math.max(1, Math.round((window.innerWidth / 2) / pixelsPerRem))
+				height: Math.max(1, Math.round((window.innerHeight / 2) / pixelsPerRem))
+				ramp: "bottomLeft"), "shapes"

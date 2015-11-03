@@ -38,6 +38,7 @@ describe "addShape", ->
 						expect(shape.shape.origin.x).toEqual 329
 						expect(shape.shape.origin.y).toEqual 521
 						expect(shape.shape.radius).toEqual 11
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 						
 					addShape "circle", "test operator"
@@ -54,9 +55,27 @@ describe "addShape", ->
 						expect(shape.shape.top).toEqual 511
 						expect(shape.shape.width).toEqual 43
 						expect(shape.shape.height).toEqual 21
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 	
 					addShape "rectangle", "test operator"
+	
+				it "appends the created element to the viewport", ->
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
+				
+			describe "ramp", ->
+				beforeEach ->				
+					addShape.__set__ "shapeToElement", (shape) ->
+						expect(shape.operator).toEqual "test operator"
+						expect(shape.shape.left).toEqual 307
+						expect(shape.shape.top).toEqual 511
+						expect(shape.shape.width).toEqual 43
+						expect(shape.shape.height).toEqual 21
+						expect(shape.shape.ramp).toEqual "bottomLeft"
+						"created element"
+	
+					addShape "ramp", "test operator"
 	
 				it "appends the created element to the viewport", ->
 					expect(addElement.calls.count()).toEqual 1
@@ -73,6 +92,7 @@ describe "addShape", ->
 						expect(shape.shape.origin.x).toEqual 307
 						expect(shape.shape.origin.y).toEqual 543
 						expect(shape.shape.radius).toEqual 11
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 						
 					addShape "circle", "test operator"
@@ -89,9 +109,27 @@ describe "addShape", ->
 						expect(shape.shape.top).toEqual 521
 						expect(shape.shape.width).toEqual 21
 						expect(shape.shape.height).toEqual 43
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 						
 					addShape "rectangle", "test operator"
+	
+				it "appends the created element to the viewport", ->
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
+					
+			describe "ramp", ->
+				beforeEach ->
+					addShape.__set__ "shapeToElement", (shape) ->
+						expect(shape.operator).toEqual "test operator"
+						expect(shape.shape.left).toEqual 296
+						expect(shape.shape.top).toEqual 521
+						expect(shape.shape.width).toEqual 21
+						expect(shape.shape.height).toEqual 43
+						expect(shape.shape.ramp).toEqual "bottomLeft"
+						"created element"
+						
+					addShape "ramp", "test operator"
 	
 				it "appends the created element to the viewport", ->
 					expect(addElement.calls.count()).toEqual 1
@@ -108,6 +146,7 @@ describe "addShape", ->
 						expect(shape.shape.origin.x).toEqual 286
 						expect(shape.shape.origin.y).toEqual 521
 						expect(shape.shape.radius).toEqual 1
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 	
 					addShape "circle", "test operator"
@@ -124,9 +163,27 @@ describe "addShape", ->
 						expect(shape.shape.top).toEqual 511
 						expect(shape.shape.width).toEqual 1
 						expect(shape.shape.height).toEqual 21
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 						
 					addShape "rectangle", "test operator"
+	
+				it "appends the created element to the viewport", ->
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
+					
+			describe "ramp", ->
+				beforeEach ->
+					addShape.__set__ "shapeToElement", (shape) ->
+						expect(shape.operator).toEqual "test operator"
+						expect(shape.shape.left).toEqual 286
+						expect(shape.shape.top).toEqual 511
+						expect(shape.shape.width).toEqual 1
+						expect(shape.shape.height).toEqual 21
+						expect(shape.shape.ramp).toEqual "bottomLeft"
+						"created element"
+						
+					addShape "ramp", "test operator"
 	
 				it "appends the created element to the viewport", ->
 					expect(addElement.calls.count()).toEqual 1
@@ -143,6 +200,7 @@ describe "addShape", ->
 						expect(shape.shape.origin.x).toEqual 307
 						expect(shape.shape.origin.y).toEqual 500
 						expect(shape.shape.radius).toEqual 1
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 	
 					addShape "circle", "test operator"
@@ -159,9 +217,27 @@ describe "addShape", ->
 						expect(shape.shape.top).toEqual 500
 						expect(shape.shape.width).toEqual 21
 						expect(shape.shape.height).toEqual 1
+						expect(shape.shape.ramp).toBeUndefined()
 						"created element"
 						
 					addShape "rectangle", "test operator"
+	
+				it "appends the created element to the viewport", ->
+					expect(addElement.calls.count()).toEqual 1
+					expect(addElement).toHaveBeenCalledWith "created element", "shapes"
+					
+			describe "ramp", ->
+				beforeEach ->
+					addShape.__set__ "shapeToElement", (shape) ->
+						expect(shape.operator).toEqual "test operator"
+						expect(shape.shape.left).toEqual 296
+						expect(shape.shape.top).toEqual 500
+						expect(shape.shape.width).toEqual 21
+						expect(shape.shape.height).toEqual 1
+						expect(shape.shape.ramp).toEqual "bottomLeft"
+						"created element"
+						
+					addShape "ramp", "test operator"
 	
 				it "appends the created element to the viewport", ->
 					expect(addElement.calls.count()).toEqual 1

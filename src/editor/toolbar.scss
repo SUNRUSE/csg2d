@@ -38,6 +38,14 @@ nav {
 		content: "\25CB";
 	}
 	
+	button[class="add"][shape="ramp"][operator="add"]::before {
+		content: "\25E3";
+	}
+	
+	button[class="add"][shape="ramp"][operator="subtract"]::before {
+		content: "\25FA";
+	}
+	
 	button[id="undo"]::before {
 		content: "\21BA";
 	}
