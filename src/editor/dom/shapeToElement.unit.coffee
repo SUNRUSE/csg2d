@@ -129,3 +129,235 @@ describe "shapeToElement", ->
 				expect(element.className).toEqual "shape"
 			it "sets the tabIndex to 0", ->
 				expect(element.tabIndex).toEqual 0
+				
+		describe "ramp (top left)", ->
+			result = undefined
+			beforeEach ->
+				result = shapeToElement
+					operator: "test operator"
+					shape:
+						left: 3,
+						top: 8,
+						height: 12,
+						width: 10,
+						ramp: "topLeft"
+			
+			it "creates exactly one div", ->
+				expect(document.createElement.calls.count()).toEqual 1
+				expect(document.createElement).toHaveBeenCalledWith "div"
+			it "returns the div", ->
+				expect(result).toBe element
+			it "copies the operator to an attribute", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "operator", "test operator"
+			it "sets the shape attribute to \"ramp\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "shape", "ramp"
+			it "sets the position attribute to \"topLeft\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "position", "topLeft"
+			it "copies the width", ->
+				expect(element.style.width).toEqual "10rem"
+			it "copies the height", ->
+				expect(element.style.height).toEqual "12rem"
+			it "copies the left", ->
+				expect(element.style.left).toEqual "3rem"
+			it "copies the top", ->
+				expect(element.style.top).toEqual "8rem"
+			it "includes a move handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "move"
+			it "includes a left handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "left"
+			it "includes a right handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "right"
+			it "includes a top handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "top"
+			it "includes a bottom handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "bottom"
+			it "includes a delete handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "delete"
+			it "includes an operator handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "operator"
+			it "includes a turn handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "turn"
+			it "includes a clone handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "clone"
+			it "includes a pullForward handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pullForward"
+			it "includes a pushBack handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pushBack"
+			it "sets the class to \"shape\"", ->
+				expect(element.className).toEqual "shape"
+			it "sets the tabIndex to 0", ->
+				expect(element.tabIndex).toEqual 0
+				
+		describe "ramp (top right)", ->
+			result = undefined
+			beforeEach ->
+				result = shapeToElement
+					operator: "test operator"
+					shape:
+						left: 3,
+						top: 8,
+						height: 12,
+						width: 10,
+						ramp: "topRight"
+			
+			it "creates exactly one div", ->
+				expect(document.createElement.calls.count()).toEqual 1
+				expect(document.createElement).toHaveBeenCalledWith "div"
+			it "returns the div", ->
+				expect(result).toBe element
+			it "copies the operator to an attribute", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "operator", "test operator"
+			it "sets the shape attribute to \"ramp\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "shape", "ramp"
+			it "sets the position attribute to \"topRight\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "position", "topRight"
+			it "copies the width", ->
+				expect(element.style.width).toEqual "10rem"
+			it "copies the height", ->
+				expect(element.style.height).toEqual "12rem"
+			it "copies the left", ->
+				expect(element.style.left).toEqual "3rem"
+			it "copies the top", ->
+				expect(element.style.top).toEqual "8rem"
+			it "includes a move handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "move"
+			it "includes a left handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "left"
+			it "includes a right handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "right"
+			it "includes a top handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "top"
+			it "includes a bottom handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "bottom"
+			it "includes a delete handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "delete"
+			it "includes an operator handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "operator"
+			it "includes a turn handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "turn"
+			it "includes a clone handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "clone"
+			it "includes a pullForward handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pullForward"
+			it "includes a pushBack handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pushBack"
+			it "sets the class to \"shape\"", ->
+				expect(element.className).toEqual "shape"
+			it "sets the tabIndex to 0", ->
+				expect(element.tabIndex).toEqual 0
+				
+		describe "ramp (bottom left)", ->
+			result = undefined
+			beforeEach ->
+				result = shapeToElement
+					operator: "test operator"
+					shape:
+						left: 3,
+						top: 8,
+						height: 12,
+						width: 10,
+						ramp: "bottomLeft"
+			
+			it "creates exactly one div", ->
+				expect(document.createElement.calls.count()).toEqual 1
+				expect(document.createElement).toHaveBeenCalledWith "div"
+			it "returns the div", ->
+				expect(result).toBe element
+			it "copies the operator to an attribute", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "operator", "test operator"
+			it "sets the shape attribute to \"ramp\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "shape", "ramp"
+			it "sets the position attribute to \"bottomLeft\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "position", "bottomLeft"
+			it "copies the width", ->
+				expect(element.style.width).toEqual "10rem"
+			it "copies the height", ->
+				expect(element.style.height).toEqual "12rem"
+			it "copies the left", ->
+				expect(element.style.left).toEqual "3rem"
+			it "copies the top", ->
+				expect(element.style.top).toEqual "8rem"
+			it "includes a move handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "move"
+			it "includes a left handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "left"
+			it "includes a right handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "right"
+			it "includes a top handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "top"
+			it "includes a bottom handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "bottom"
+			it "includes a delete handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "delete"
+			it "includes an operator handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "operator"
+			it "includes a turn handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "turn"
+			it "includes a clone handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "clone"
+			it "includes a pullForward handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pullForward"
+			it "includes a pushBack handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pushBack"
+			it "sets the class to \"shape\"", ->
+				expect(element.className).toEqual "shape"
+			it "sets the tabIndex to 0", ->
+				expect(element.tabIndex).toEqual 0
+				
+		describe "ramp (bottom right)", ->
+			result = undefined
+			beforeEach ->
+				result = shapeToElement
+					operator: "test operator"
+					shape:
+						left: 3,
+						top: 8,
+						height: 12,
+						width: 10,
+						ramp: "bottomRight"
+			
+			it "creates exactly one div", ->
+				expect(document.createElement.calls.count()).toEqual 1
+				expect(document.createElement).toHaveBeenCalledWith "div"
+			it "returns the div", ->
+				expect(result).toBe element
+			it "copies the operator to an attribute", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "operator", "test operator"
+			it "sets the shape attribute to \"ramp\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "shape", "ramp"
+			it "sets the position attribute to \"bottomRight\"", ->
+				expect(element.setAttribute).toHaveBeenCalledWith "position", "bottomRight"
+			it "copies the width", ->
+				expect(element.style.width).toEqual "10rem"
+			it "copies the height", ->
+				expect(element.style.height).toEqual "12rem"
+			it "copies the left", ->
+				expect(element.style.left).toEqual "3rem"
+			it "copies the top", ->
+				expect(element.style.top).toEqual "8rem"
+			it "includes a move handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "move"
+			it "includes a left handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "left"
+			it "includes a right handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "right"
+			it "includes a top handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "top"
+			it "includes a bottom handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "bottom"
+			it "includes a delete handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "delete"
+			it "includes an operator handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "operator"
+			it "includes a turn handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "turn"
+			it "includes a clone handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "clone"
+			it "includes a pullForward handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pullForward"
+			it "includes a pushBack handle", ->
+				expect(createHandle).toHaveBeenCalledWith element, "pushBack"
+			it "sets the class to \"shape\"", ->
+				expect(element.className).toEqual "shape"
+			it "sets the tabIndex to 0", ->
+				expect(element.tabIndex).toEqual 0

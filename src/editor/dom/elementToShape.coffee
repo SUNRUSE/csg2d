@@ -14,5 +14,6 @@ module.exports = (element) ->
 			top: (parseInt element.style.top)
 			width: (parseInt element.style.width)
 			height: (parseInt element.style.height)
+			ramp: if (element.getAttribute "shape") is "ramp" then element.getAttribute "position"
 		
 	output

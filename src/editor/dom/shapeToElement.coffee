@@ -22,7 +22,8 @@ module.exports = (shape) ->
 		createHandle element, "radiusLeft"
 		createHandle element, "radiusRight"
 	else 
-		element.setAttribute "shape", "rectangle"
+		element.setAttribute "shape", if shape.shape.ramp then "ramp" else "rectangle"
+		if shape.shape.ramp then element.setAttribute "position", shape.shape.ramp
 		element.style.left = shape.shape.left + "rem"
 		element.style.top = shape.shape.top + "rem"
 		element.style.width = shape.shape.width + "rem"
@@ -31,4 +32,5 @@ module.exports = (shape) ->
 		createHandle element, "top"
 		createHandle element, "bottom"
 		createHandle element, "right"
+		if shape.shape.ramp then createHandle element, "turn"
 	element
