@@ -20,6 +20,7 @@ describe "events", ->
 		it "pullForward", -> expect(events.__get__ "pullForward").toBe require "./actions/pullForward"
 		it "pushBack", -> expect(events.__get__ "pushBack").toBe require "./actions/pushBack"
 		it "operator", -> expect(events.__get__ "operator").toBe require "./actions/operator"
+		it "turn", -> expect(events.__get__ "turn").toBe require "./actions/turn"
 		it "elementsToMap", -> expect(events.__get__ "elementsToMap").toBe require "./dom/elementsToMap"
 		it "saveFile", -> expect(events.__get__ "saveFile").toBe require "./io/saveFile"
 		it "addPlayer", -> expect(events.__get__ "addPlayer").toBe require "./actions/entities/addPlayer"
@@ -55,6 +56,7 @@ describe "events", ->
 				"pullForward"
 				"pushBack"
 				"operator"
+				"turn"
 				"elementsToMap"
 				"saveFile"
 				"addPlayer"
@@ -166,6 +168,17 @@ describe "events", ->
 							it "calls operator with the target element", ->
 								expect(dependencies.operator).toHaveBeenCalledWith "test parent node"
 								expect(dependencies.operator.calls.count()).toEqual 1
+							doesNothingAfterClick()
+							
+						describe "when the target element is a turn handle", ->
+							beforeEach ->
+								parentNode = "test parent node"
+								attributes.kind = "turn"
+								dependencies.turn.and.stub()
+								go()
+							it "calls turn with the target element", ->
+								expect(dependencies.turn).toHaveBeenCalledWith "test parent node"
+								expect(dependencies.turn.calls.count()).toEqual 1
 							doesNothingAfterClick()
 							
 						describe "when the target element is a move handle", ->
@@ -380,6 +393,13 @@ describe "events", ->
 							beforeEach ->
 								parentNode = "test parent node"
 								attributes.kind = "operator"
+								go()
+							doesNothing()
+							
+						describe "when the target element is a turn handle", ->
+							beforeEach ->
+								parentNode = "test parent node"
+								attributes.kind = "turn"
 								go()
 							doesNothing()
 							

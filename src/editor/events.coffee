@@ -6,6 +6,7 @@ clone = require "./actions/clone"
 pullForward = require "./actions/pullForward"
 pushBack = require "./actions/pushBack"
 operator = require "./actions/operator"
+turn = require "./actions/turn"
 
 move = require "./actions/bounds/move"
 moveMiddle = require "./actions/bounds/moveMiddle"
@@ -42,6 +43,7 @@ module.exports =
 							when "delete" then _delete element.parentNode
 							when "clone" then clone element.parentNode
 							when "operator" then operator element.parentNode
+							when "turn" then turn element.parentNode
 							when "pullForward" then pullForward element.parentNode
 							when "pushBack" then pushBack element.parentNode
 				when "BUTTON"

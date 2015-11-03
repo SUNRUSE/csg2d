@@ -51,6 +51,11 @@
 	top: 25%;
 }
 
+.handle[kind="turn"] {
+	left: 25%;
+	top: 75%;
+}
+
 .handle[kind="operator"] {
 	left: 75%;
 	top: 75%;
@@ -86,6 +91,11 @@
 
 .handle[kind="clone"]::after {
 	content: "\2442";
+}
+
+.handle[kind="turn"]::after {
+	content: "\2442";
+	content: "\21BB";
 }
 
 .handle[kind="angle"] {
