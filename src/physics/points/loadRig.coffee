@@ -7,11 +7,17 @@ link = require "./link"
 # - A JSON object specifying a rig to load.
 # - A vector specifying an offset.  This is added to each point's location.
 # - The object returned by "scene".
-# - A function called for every point.  This is given the point object created and the returned function will be called after every update of the point's location.
 # - Null, or an object equivalent to the ./../../input/gamepad object to control the tension of links in the rig.
-module.exports = (distanceField, gravity, rig, offset, scene, create, gamepad) ->
+# Returns an object containing:
+# - points: An object where the keys are the names of the points and the values are the created point objects.
+# - links: An object where the keys are the name of the links and the values are objects containing:
+#	- from: The created point object the link runs from.
+#	- to: The created point object the link runs to.
+module.exports = (distanceField, gravity, rig, offset, scene, gamepad) ->
 	if window then window.rig = rig
-	createdPoints = {}
+	output = 
+		points: {}
+		links: {}
 	for name, rigPoint of rig.points
 		newPoint = 
 			location:
@@ -21,8 +27,11 @@ module.exports = (distanceField, gravity, rig, offset, scene, create, gamepad) -
 				x: 0
 				y: 0
 			material: rig.pointMaterials[rigPoint.material]
-		createdPoints[name] = newPoint
+		output.points[name] = newPoint
 		scene.append point distanceField, gravity, newPoint
-		scene.append create newPoint
 	for name, rigLink of rig.links
-		scene.append link createdPoints[rigLink.from], createdPoints[rigLink.to], rig.linkMaterials[rigLink.material], gamepad, rigLink.controls
+		scene.append link output.points[rigLink.from], output.points[rigLink.to], rig.linkMaterials[rigLink.material], gamepad, rigLink.controls
+		output.links[name] = 
+			from: output.points[rigLink.from]
+			to: output.points[rigLink.to]
+	output

@@ -6,6 +6,7 @@ scene = require "./../../physics/points/scene"
 loadRig = require "./../../physics/points/loadRig"
 player = require "./../../physics/points/rigs/player"
 gravity = require "./../../physics/falloff/gravity"
+createPointElement = require "./../dom/createPointElement"
 
 gamepad = require "./../../input/gamepad"
 
@@ -26,14 +27,5 @@ module.exports = () ->
 		
 		distanceField = mapToDistanceField map
 		gravityField = gravity map
-		loadRig distanceField, gravityField, player, spawn.origin, instance, ((point) ->
-			element = document.createElement "div"
-			element.className = "point"
-			
-			update = ->
-				element.style.transform = "translate(" + point.location.x + "rem," + point.location.y + "rem)"
-			update()
-			
-			document.getElementById "preview"
-				.appendChild element
-			update), gamepad
+		created = loadRig distanceField, gravityField, player, spawn.origin, instance, gamepad
+		createPointElement instance, point for name, point of created.points

@@ -14,9 +14,11 @@ describe "play", ->
 		
 		it "player", -> expect(play.__get__ "player").toBe require "./../../physics/points/rigs/player"
 		it "gamepad", -> expect(play.__get__ "gamepad").toBe require "./../../input/gamepad"
+		
+		it "createPointElement", -> expect(play.__get__ "createPointElement").toBe require "./../dom/createPointElement"
 			
 	describe "on calling", ->
-		map = scene = loadRig = valueOfObject = alert = document = preview = undefined
+		map = scene = loadRig = valueOfObject = alert = document = preview = createPointElement = undefined
 		beforeEach ->
 			valueOfObject = jasmine.createSpy "valueOfObject"
 			play.__set__ "valueOfObject", valueOfObject
@@ -43,15 +45,11 @@ describe "play", ->
 			play.__set__ "gravity", (_map) ->
 				expect(_map).toBe map
 				"test gravity field"
-			
-			preview = 
-				appendChild: jasmine.createSpy "appendChild"
+				
+			createPointElement = jasmine.createSpy "createPointElement"
+			play.__set__ "createPointElement", createPointElement
 			
 			document = 
-				createElement: jasmine.createSpy "createElement"
-				getElementById: (id) -> switch id
-					when "preview" then preview
-					else null
 				body:
 					setAttribute: jasmine.createSpy "setAttribute"
 			play.__set__ "document", document
@@ -65,12 +63,6 @@ describe "play", ->
 			
 			it "does not attempt to determine a random spawn point", ->
 				expect(valueOfObject).not.toHaveBeenCalled()
-			
-			it "does not create any elements", ->
-				expect(document.createElement).not.toHaveBeenCalled()
-			
-			it "does not append any elements to the viewport", ->
-				expect(preview.appendChild).not.toHaveBeenCalled()
 				
 			it "does not create a scene", ->
 				expect(scene).not.toHaveBeenCalled()
@@ -85,8 +77,11 @@ describe "play", ->
 			it "does not change the editor mode", ->
 				expect(document.body.setAttribute).not.toHaveBeenCalled()
 				
+			it "does not create any points for any elements", ->
+				expect(createPointElement).not.toHaveBeenCalled()
+				
 		describe "when spawn points exist", ->
-			sceneInstance = undefined
+			sceneInstance = rigInstance = undefined
 			beforeEach ->
 				sceneInstance = 
 					stop: jasmine.createSpy "stop"
@@ -102,18 +97,20 @@ describe "play", ->
 						x: 80
 						y: 33
 					facing: "right"
+					
+				rigInstance = 
+					points:
+						pointA: "test point a"
+						pointB: "test point b"
+						pointC: "test point c"
+					
+				loadRig.and.returnValue rigInstance
 			
 				play()
 			
 			it "determines a random spawn point", ->
 				expect(valueOfObject.calls.count()).toEqual 1
 				expect(valueOfObject).toHaveBeenCalledWith "test player entities"
-			
-			it "does not create any elements", ->
-				expect(document.createElement).not.toHaveBeenCalled()
-			
-			it "does not append any elements to the viewport", ->
-				expect(preview.appendChild).not.toHaveBeenCalled()
 				
 			it "does not show an alert", ->
 				expect(alert).not.toHaveBeenCalled()
@@ -130,7 +127,7 @@ describe "play", ->
 				offset = 
 					x: 80
 					y: 33
-				expect(loadRig).toHaveBeenCalledWith "test distance field", "test gravity field", "test player rig", offset, sceneInstance, (jasmine.any Function), "test gamepad"
+				expect(loadRig).toHaveBeenCalledWith "test distance field", "test gravity field", "test player rig", offset, sceneInstance, "test gamepad"
 				
 			it "does not end the scene", ->
 				expect(sceneInstance.stop).not.toHaveBeenCalled()
@@ -138,57 +135,7 @@ describe "play", ->
 			it "makes the function to end the scene available", ->
 				expect(play.stop).toBe sceneInstance.stop
 				
-			describe "on calling the creation callback", ->
-				pointModel = result = element = undefined
-				beforeEach ->
-					pointModel = 
-						location:
-							x: 14
-							y: 27
-					element = 
-						style: {}
-					document.createElement.and.returnValue element
-					result = (loadRig.calls.argsFor 0)[5] pointModel
-				
-				it "creates one new div", ->
-					expect(document.createElement.calls.count()).toEqual 1
-					expect(document.createElement).toHaveBeenCalledWith "div"
-					
-				it "sets the div's class to \"point\"", ->
-					expect(element.className).toEqual "point"
-					
-				it "applies a transform style to position the point", ->
-					expect(element.style.transform).toEqual "translate(14rem,27rem)"
-				
-				it "appends the div to the viewport", ->
-					expect(preview.appendChild.calls.count()).toEqual 1
-					expect(preview.appendChild).toHaveBeenCalledWith element
-				
-				it "does not end the scene", ->
-					expect(sceneInstance.stop).not.toHaveBeenCalled()
-				it "does not load any further player rigs", ->
-					expect(loadRig.calls.count()).toEqual 1
-				it "does not create further scenes", ->
-					expect(scene.calls.count()).toEqual 1
-				it "does not change the editor mode", ->
-					expect(document.body.setAttribute.calls.count()).toEqual 1
-				it "does not show an alert", ->
-					expect(alert).not.toHaveBeenCalled()
-				it "returns a function", ->
-					expect(result).toEqual jasmine.any Function
-					
-				describe "on calling the returned function", ->
-					beforeEach ->
-						pointModel.location.x = 30
-						pointModel.location.y = 11
-						result()
-						
-					xit "does not create new divs", ->
-					xit "does not append further divs to the viewport", ->
-					xit "does not end the scene", ->
-					xit "does not load any further player rigs", ->
-					xit "does not create further scenes", ->
-					xit "does not change the editor mode", ->
-					xit "does not show an alert", ->
-					it "updates the style to match the point's updated location", ->
-						expect(element.style.transform).toEqual "translate(30rem,11rem)"
+			it "creates an element for every returned point", ->
+				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point a"
+				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point b"
+				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point c"

@@ -8,11 +8,11 @@ describe "loadRig", ->
 		it "link", -> expect(loadRig.__get__ "link").toBe require "./link"
 	
 	describe "on calling", ->
-		scene = point = link = create = undefined
+		scene = point = link = undefined
 		pointA = pointB = pointC = undefined
-		updateA = updateB = updateC = undefined
 		pointModelA = pointModelB = pointModelC = undefined
 		linkA = linkB = undefined
+		result = undefined
 		beforeEach ->
 			point = jasmine.createSpy "point"
 			pointA = jasmine.createSpy "pointA"
@@ -83,17 +83,7 @@ describe "loadRig", ->
 				x: 13
 				y: -4
 				
-			updateA = jasmine.createSpy "updateA"
-			updateB = jasmine.createSpy "updateB"
-			updateC = jasmine.createSpy "updateC"
-			create = jasmine.createSpy "create"
-			create.and.callFake (model) -> switch model
-				when pointModelA then updateA
-				when pointModelB then updateB
-				when pointModelC then updateC
-				else null
-				
-			loadRig "test distance field", "test gravity", rig, offset, scene, create, "test gamepad"
+			result = loadRig "test distance field", "test gravity", rig, offset, scene, "test gamepad"
 			
 		it "creates every point once", ->
 			expect(point.calls.count()).toEqual 3
@@ -144,21 +134,23 @@ describe "loadRig", ->
 			expect(linkA).not.toHaveBeenCalled()
 			expect(linkB).not.toHaveBeenCalled()
 			
-		it "executes the creation callback for every point", ->
-			expect(create.calls.count()).toEqual 3
-			
-			expect(create).toHaveBeenCalledWith pointModelA
-			expect(create).toHaveBeenCalledWith pointModelB
-			expect(create).toHaveBeenCalledWith pointModelC
-			
-		it "does not execute the update callbacks returned", ->
-			expect(updateA).not.toHaveBeenCalled()
-			expect(updateB).not.toHaveBeenCalled()
-			expect(updateC).not.toHaveBeenCalled()
-			
 		it "adds functions to the scene", ->
 			expect(scene.append).toHaveBeenCalled()
 			expect(args).toEqual [jasmine.any Function] for args in scene.append.calls.allArgs() 
+		
+		it "returns an object", ->
+			expect(result).toEqual jasmine.any Object
+			
+		it "copies the created points", ->
+			expect(result.points.pointA).toBe pointModelA
+			expect(result.points.pointB).toBe pointModelB
+			expect(result.points.pointC).toBe pointModelC
+		
+		it "copies the created links", ->
+			expect(result.links.linkA.from).toBe pointModelB
+			expect(result.links.linkA.to).toBe pointModelA
+			expect(result.links.linkB.from).toBe pointModelC
+			expect(result.links.linkB.to).toBe pointModelB
 		
 		describe "on updating the scene", ->
 			before = run = undefined
@@ -177,10 +169,6 @@ describe "loadRig", ->
 			it "does not create any new links", ->
 				run()
 				expect(link.calls.count()).toEqual 2
-				
-			it "does not execute the creation callback again", ->
-				run()
-				expect(create.calls.count()).toEqual 3
 				
 			it "updates every point once", ->
 				run()
@@ -201,16 +189,4 @@ describe "loadRig", ->
 				
 				linkA.and.callFake check
 				linkB.and.callFake check
-				run()
-				
-			it "executes the update callbacks returned once", ->
-				run()
-				expect(updateA.calls.count()).toEqual 1
-				expect(updateB.calls.count()).toEqual 1
-				expect(updateC.calls.count()).toEqual 1
-				
-			it "executes the update callbacks after the points", ->
-				updateA.and.callFake -> expect(pointA).toHaveBeenCalled()
-				updateB.and.callFake -> expect(pointB).toHaveBeenCalled()
-				updateC.and.callFake -> expect(pointC).toHaveBeenCalled()
 				run()
