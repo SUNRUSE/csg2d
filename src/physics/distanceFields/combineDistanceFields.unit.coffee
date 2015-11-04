@@ -14,7 +14,7 @@ describe "combineDistanceFields", ->
 				expect(distanceField 4, 7).toEqual 9
 				
 		describe "subtract", ->
-			it "returns the inverse distance to the shape", ->
+			it "returns the inverse distance to the shape with some extra tolerance", ->
 				shape = (x, y) ->
 					expect(x).toBe 4
 					expect(y).toBe 7
@@ -22,7 +22,7 @@ describe "combineDistanceFields", ->
 				
 				distanceField = combineDistanceFields "subtract", null, shape
 				
-				expect(distanceField 4, 7).toEqual -9
+				expect(distanceField 4, 7).toEqual -9.05
 	
 	describe "with an existing scene", ->
 		describe "add", ->
@@ -72,7 +72,7 @@ describe "combineDistanceFields", ->
 				
 				expect(distanceField 4, 7).toEqual 9
 				
-			it "returns the inverse distance to the shape when inside the shape", ->
+			it "returns the inverse distance to the shape when inside the shape with some extra tolerance", ->
 				scene = (x, y) ->
 					expect(x).toBe 4
 					expect(y).toBe 7
@@ -85,4 +85,4 @@ describe "combineDistanceFields", ->
 				
 				distanceField = combineDistanceFields "subtract", scene, shape
 				
-				expect(distanceField 4, 7).toEqual 14
+				expect(distanceField 4, 7).toEqual 14.05

@@ -70,3 +70,7 @@ describe "slippy", ->
     describe "when the line does not move", ->
         it "returns null", ->
             expect(slippy distanceField, 252, 252, 252, 252).toBeNull()
+            
+    it "does not get stuck when crossing the borders between subtractive shapes within an additive shape", ->
+        distanceField2 = mapToDistanceField require "./touchingSubtractiveShapes.json"
+        expect(slippy distanceField2, 225, 233, 264, 259).toBeNull()
