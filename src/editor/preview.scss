@@ -1,8 +1,102 @@
-.point {
+.point, .link {
 	position: absolute;
+}
+
+.link {
+	transform-origin: 0 center;
+}
+
+.point[sprite="head"] {
+	padding-left: 0.5rem;
+	width: 1.25rem; 
+	height: 2rem;
+	left: -0.875rem;
+	top: -2rem;
+	background: linear-gradient(to bottom, peachpuff, sandybrown);
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+	border-top-right-radius: 1rem;
+}
+
+.point[sprite="foot"] {
+	width: 1.25rem; 
+	height: 1.4rem;
+	left: -0.625rem;
+	top: -0.5rem;
+	background: linear-gradient(to bottom, #222, black);
+	border-bottom: 0.125rem solid beige;
+	border-radius: 0.7rem;
+}
+
+.link[sprite="torso"]::after {
+	position: absolute;
+	content: "";
+	left: -0.5rem;
+	top: -1.2rem;
+	right: -0.5rem;
+	bottom: -1.2rem;
+	background: linear-gradient(to right, white, lightskyblue);
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+	border-top-right-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+
+.link[sprite="legLower"]::after {
+	position: absolute;
+	content: "";
+	border-radius: 1rem;
 	left: -0.5rem;
 	top: -0.5rem;
-	width: 1rem;
-	height: 1rem;
-	background: purple;
+	right: -0.5rem;
+	bottom: -0.5rem;
+	background: linear-gradient(to left,cornflowerblue 1rem, darkblue);
+}
+
+.link[sprite="legUpper"]::after {
+	position: absolute;
+	content: "";
+	border-radius: 1rem;
+	left: -0.5rem;
+	top: -0.5rem;
+	right: -0.5rem;
+	bottom: -0.5rem;
+	background: linear-gradient(to left, cornflowerblue 1rem, darkslategrey);
+}
+
+.link[sprite="armUpper"]::after {
+	position: absolute;
+	content: "";
+	border-radius: 1rem;
+	left: -0.5rem;
+	top: -0.5rem;
+	right: -0.5rem;
+	bottom: -0.5rem;
+	background: linear-gradient(to right, white, lightskyblue);
+}
+
+.link[sprite="armLower"]::after {
+	position: absolute;
+	content: "";
+	border-radius: 1rem;
+	left: -0.375rem;
+	top: -0.375rem;
+	right: -0.375rem;
+	bottom: -0.375rem;
+	background: linear-gradient(to right, peachpuff, sandybrown);
+}
+
+.link[sprite="board"]::after {
+	position: absolute;
+	content: "";
+	left: -1.5rem;
+	top: -0.7rem;
+	bottom: -0.7rem;
+	right: -1.5rem;
+	border-radius: 1rem;
+	border-bottom-left-radius: 0.7rem;
+	border-bottom-right-radius: 0.7rem;
+	border: 0.125rem solid darkgoldenrod;
+	background:linear-gradient(to bottom, #222, #000, #222);
 }

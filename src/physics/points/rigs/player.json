@@ -1,10 +1,17 @@
 {
 	"pointMaterials": {
-		"person": {
+		"limb": {
 			"density": 0.0125,
 			"friction": 1,
 			"airResistance": 1.015,
 			"mass": 0.02,
+			"restitution": 1.5
+		},
+		"joint": {
+			"density": 0.0125,
+			"friction": 1,
+			"airResistance": 1.05,
+			"mass": 0.001,
 			"restitution": 1.5
 		},
 		"wheel": {
@@ -16,40 +23,78 @@
 		}
 	},
 	"points": {
-		"torso": {
+		"collarbone": {
 			"location": {
 				"x": 0,
 				"y": -5
 			},
-			"material": "person"
+			"material": "limb",
+			"sprite": "head"
+		},
+		"hips": {
+			"location": {
+				"x": 0,
+				"y": -1.5
+			},
+			"material": "joint"
+		},
+		"leftElbow": {
+			"location": {
+				"x": -2,
+				"y": -3.5
+			},
+			"material": "joint"
 		},
 		"leftHand": {
 			"location": {
 				"x": -3,
 				"y": -1.5
 			},
-			"material": "person"
+			"material": "limb"
+		},
+		"rightElbow": {
+			"location": {
+				"x": 2,
+				"y": -3.5
+			},
+			"material": "joint"
 		},
 		"rightHand": {
 			"location": {
 				"x": 3,
 				"y": -1.5
 			},
-			"material": "person"
+			"material": "limb"
 		},
-		"backWheel": {
+		"leftKnee": {
 			"location": {
-				"x": -3,
+				"x": -2,
+				"y": -0.5
+			},
+			"material": "joint"
+		},
+		"rightKnee": {
+			"location": {
+				"x": 2,
+				"y": -0.5
+			},
+			"material": "joint"
+		},
+		"leftWheel": {
+			"location": {
+				"x": -2.5,
 				"y": 2
 			},
-			"material": "wheel"
+			"material": "wheel",
+			"sprite": "foot"
 		},
-		"frontWheel": {
+		"rightWheel": {
 			"location": {
-				"x": 3,
+				"x": 2.5,
 				"y": 2
 			},
-			"material": "wheel"
+			"material": "wheel",
+			"sprite": "foot"
 		}
 	},
 	"linkMaterials": {
@@ -58,7 +103,7 @@
 			"linearityShape": 2,
 			"strength": 0.7
 		},
-		"leg": {
+		"upright": {
 			"linearityScale": 0.5,
 			"linearityShape": 2,
 			"strength": 0.001
@@ -71,28 +116,34 @@
 		"looser": {
 			"linearityScale": 1,
 			"linearityShape": 1,
-			"strength": 0.0005
+			"strength": 0.00005
 		}
 	},
 	"links": {
-		"frontSlope": {
-			"from": "torso",
-			"to": "frontWheel",
-			"material": "leg",
+		"board": {
+			"from": "leftWheel",
+			"to": "rightWheel",
+			"material": "axle",
+			"sprite": "board"
+		},
+		"rightBodyUpright": {
+			"from": "collarbone",
+			"to": "rightWheel",
+			"material": "upright",
 			"controls": {
 				"leanRight": 1.15
 			}
 		},
-		"backSlope": {
-			"from": "torso",
-			"to": "backWheel",
-			"material": "leg",
+		"leftBodyUpright": {
+			"from": "collarbone",
+			"to": "leftWheel",
+			"material": "upright",
 			"controls": {
 				"leanLeft": 1.15
 			}
 		},
 		"leftArm": {
-			"from": "torso",
+			"from": "collarbone",
 			"to": "leftHand",
 			"material": "loose",
 			"controls": {
@@ -100,22 +151,81 @@
 			}
 		},
 		"rightArm": {
-			"from": "torso",
+			"from": "collarbone",
 			"to": "rightHand",
 			"material": "loose",
 			"controls": {
 				"leanRight": 1.17
 			}
 		},
-		"armSpan": {
+		"leftArmLower": {
+			"from": "leftHand",
+			"to": "leftElbow",
+			"material": "looser",
+			"sprite": "armLower"
+		},
+		"leftArmUpper": {
+			"from": "collarbone",
+			"to": "leftElbow",
+			"material": "looser",
+			"sprite": "armUpper"
+		},
+		"rightArmLower": {
 			"from": "rightHand",
-			"to": "leftHand",
+			"to": "rightElbow",
+			"material": "looser",
+			"sprite": "armLower"
+		},
+		"rightArmUpper": {
+			"from": "collarbone",
+			"to": "rightElbow",
+			"material": "looser",
+			"sprite": "armUpper"
+		},
+		"rightLegUpper": {
+			"from": "hips",
+			"to": "rightKnee",
+			"material": "looser",
+			"sprite": "legUpper"
+		},
+		"rightLegLower": {
+			"from": "rightWheel",
+			"to": "rightKnee",
+			"material": "looser",
+			"sprite": "legLower"
+		},
+		"leftLegUpper": {
+			"from": "hips",
+			"to": "leftKnee",
+			"material": "looser",
+			"sprite": "legUpper"
+		},
+		"leftLegLower": {
+			"from": "leftWheel",
+			"to": "leftKnee",
+			"material": "looser",
+			"sprite": "legLower"
+		},
+		"spine": {
+			"from": "collarbone",
+			"to": "hips",
+			"material": "loose",
+			"sprite": "torso"
+		},
+		"armSpan": {
+			"from": "leftHand",
+			"to": "rightHand",
 			"material": "looser"
 		},
-		"axle": {
-			"from": "backWheel",
-			"to": "frontWheel",
-			"material": "axle"
+		"elbowSpan": {
+			"from": "leftElbow",
+			"to": "rightElbow",
+			"material": "looser"
+		},
+		"kneeSep": {
+			"from": "leftKnee",
+			"to": "rightKnee",
+			"material": "looser"
 		}
 	}
 }
