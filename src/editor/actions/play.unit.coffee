@@ -18,8 +18,10 @@ describe "play", ->
 		it "createPointElement", -> expect(play.__get__ "createPointElement").toBe require "./../dom/createPointElement"
 		it "createLinkElement", -> expect(play.__get__ "createLinkElement").toBe require "./../dom/createLinkElement"
 			
+		it "playerPhysics", -> expect(play.__get__ "playerPhysics").toBe require "./../../physics/player"
+			
 	describe "on calling", ->
-		map = scene = loadRig = valueOfObject = alert = document = preview = createPointElement = createLinkElement = undefined
+		playerPhysics = map = scene = loadRig = valueOfObject = alert = document = preview = createPointElement = createLinkElement = undefined
 		beforeEach ->
 			valueOfObject = jasmine.createSpy "valueOfObject"
 			play.__set__ "valueOfObject", valueOfObject
@@ -36,6 +38,9 @@ describe "play", ->
 			play.__set__ "elementsToMap", -> map
 			
 			play.__set__ "player", "test player rig"
+			
+			playerPhysics = jasmine.createSpy "playerPhysics"
+			play.__set__ "playerPhysics", playerPhysics
 			
 			play.__set__ "gamepad", "test gamepad"
 			
@@ -86,6 +91,9 @@ describe "play", ->
 				
 			it "does not create any elements for any links", ->
 				expect(createLinkElement).not.toHaveBeenCalled()
+				
+			it "does not configure player physics", ->
+				expect(playerPhysics).not.toHaveBeenCalled()
 				
 		describe "when spawn points exist", ->
 			sceneInstance = rigInstance = undefined
@@ -153,3 +161,7 @@ describe "play", ->
 			it "creates an element for every returned link", ->
 				expect(createLinkElement).toHaveBeenCalledWith sceneInstance, "test link a"
 				expect(createLinkElement).toHaveBeenCalledWith sceneInstance, "test link b"
+				
+			it "does configures player physics", ->
+				expect(playerPhysics.calls.count()).toEqual 1
+				expect(playerPhysics).toHaveBeenCalledWith rigInstance, "test gamepad", sceneInstance

@@ -11,6 +11,8 @@ createLinkElement = require "./../dom/createLinkElement"
 
 gamepad = require "./../../input/gamepad"
 
+playerPhysics = require "./../../physics/player"
+
 # On calling, switches the editor to "play" mode, spawning a player and removing all editor controls.
 # If no player spawn points exist, an alert is shown and play mode is not entered.
 module.exports = () ->
@@ -31,3 +33,5 @@ module.exports = () ->
 		created = loadRig distanceField, gravityField, player, spawn.origin, instance, gamepad
 		createLinkElement instance, link for name, link of created.links
 		createPointElement instance, point for name, point of created.points
+		
+		playerPhysics created, gamepad, instance
