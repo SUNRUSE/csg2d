@@ -13,6 +13,7 @@ link = require "./link"
 # - links: An object where the keys are the name of the links and the values are objects containing:
 #	- from: The created point object the link runs from.
 #	- to: The created point object the link runs to.
+#	- sprite: The "sprite" property from the rig JSON for this link, if any.
 module.exports = (distanceField, gravity, rig, offset, scene, gamepad) ->
 	if window then window.rig = rig
 	output = 
@@ -27,6 +28,7 @@ module.exports = (distanceField, gravity, rig, offset, scene, gamepad) ->
 				x: 0
 				y: 0
 			material: rig.pointMaterials[rigPoint.material]
+		if rigPoint.sprite then newPoint.sprite = rigPoint.sprite
 		output.points[name] = newPoint
 		scene.append point distanceField, gravity, newPoint
 	for name, rigLink of rig.links
@@ -34,4 +36,5 @@ module.exports = (distanceField, gravity, rig, offset, scene, gamepad) ->
 		output.links[name] = 
 			from: output.points[rigLink.from]
 			to: output.points[rigLink.to]
+			sprite: rigLink.sprite
 	output

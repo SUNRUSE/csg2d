@@ -4,6 +4,7 @@
 # - An object containing:
 #	- location: Vector specifying the current location of the point.
 #	- velocity: Vector specifying the distance to traverse each point before application of mass.
+#	- sprite: The "sprite" property from the rig JSON for this point, if any.
 #	- material: An object describing the point's static data:
 #		- density: When 0, the point is completely unaffected by gravity.  When 1, the point experiences full Earth gravity.
 #		- airResistance: When 1, the point will coast forever.  When 2, the point will lose half of its speed every tick.  When 3, the point will lose two thirds of its speed every tick.

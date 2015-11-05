@@ -54,6 +54,7 @@ describe "loadRig", ->
 							x: 6
 							y: 18
 						material: "materialB"
+						sprite: "test point sprite 1"
 					pointB:
 						location:
 							x: 24
@@ -64,6 +65,7 @@ describe "loadRig", ->
 							x: 4
 							y: 23
 						material: "materialB"
+						sprite: "test point sprite 2"
 				linkMaterials:
 					materialA: "test link material a"
 					materialB: "test link material b"
@@ -74,6 +76,7 @@ describe "loadRig", ->
 						to: "pointA"
 						material: "materialC"
 						controls: "test controls a"
+						sprite: "test link sprite 1"
 					linkB:
 						from: "pointC"
 						to: "pointB"
@@ -95,6 +98,7 @@ describe "loadRig", ->
 					x: 0
 					y: 0
 				material: "test point material b"
+				sprite: "test point sprite 1"
 				
 			expect(point).toHaveBeenCalledWith "test distance field", "test gravity",
 				location:
@@ -113,6 +117,7 @@ describe "loadRig", ->
 					x: 0
 					y: 0
 				material: "test point material b"
+				sprite: "test point sprite 2"
 				
 		it "creates distinct point models", ->
 			expect(pointModelA).not.toBe pointModelB
@@ -149,8 +154,10 @@ describe "loadRig", ->
 		it "copies the created links", ->
 			expect(result.links.linkA.from).toBe pointModelB
 			expect(result.links.linkA.to).toBe pointModelA
+			expect(result.links.linkA.sprite).toEqual "test link sprite 1"
 			expect(result.links.linkB.from).toBe pointModelC
 			expect(result.links.linkB.to).toBe pointModelB
+			expect(result.links.linkB.sprite).toBeUndefined()
 		
 		describe "on updating the scene", ->
 			before = run = undefined
