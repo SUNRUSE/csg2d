@@ -75,6 +75,8 @@ describe "point", ->
 					expect(model.material.restitution).toEqual 5
 				it "does not sample the distance field", ->
 					expect(distanceField).not.toHaveBeenCalled()
+				it "clears the colliing flag", ->
+					expect(model.colliding).toBe false
 			describe "on colliding", ->
 				beforeEach ->
 					slippy.and.returnValue
@@ -98,3 +100,5 @@ describe "point", ->
 					expect(model.material.restitution).toEqual 5
 				it "does not sample the distance field", ->
 					expect(distanceField).not.toHaveBeenCalled()
+				it "sets the colliding flag", ->
+					expect(model.colliding).toBe true

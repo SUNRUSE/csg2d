@@ -32,8 +32,10 @@ module.exports = (distanceField, gravity, point) -> ->
 		acrossSurface /= point.material.friction
 		point.velocity.x = normal.x * (-(Math.abs againstSurface)) + normal.y * acrossSurface
 		point.velocity.y = normal.y * (-(Math.abs againstSurface)) - normal.x * acrossSurface
+		point.colliding = true
 	else
 		point.location.x = newX
 		point.location.y = newY
 		point.velocity.x /= point.material.airResistance
 		point.velocity.y /= point.material.airResistance
+		point.colliding = false
