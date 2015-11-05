@@ -7,6 +7,7 @@ loadRig = require "./../../physics/points/loadRig"
 player = require "./../../physics/points/rigs/player"
 gravity = require "./../../physics/falloff/gravity"
 createPointElement = require "./../dom/createPointElement"
+createLinkElement = require "./../dom/createLinkElement"
 
 gamepad = require "./../../input/gamepad"
 
@@ -28,4 +29,5 @@ module.exports = () ->
 		distanceField = mapToDistanceField map
 		gravityField = gravity map
 		created = loadRig distanceField, gravityField, player, spawn.origin, instance, gamepad
+		createLinkElement instance, link for name, link of created.links
 		createPointElement instance, point for name, point of created.points

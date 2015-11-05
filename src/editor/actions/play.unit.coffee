@@ -16,9 +16,10 @@ describe "play", ->
 		it "gamepad", -> expect(play.__get__ "gamepad").toBe require "./../../input/gamepad"
 		
 		it "createPointElement", -> expect(play.__get__ "createPointElement").toBe require "./../dom/createPointElement"
+		it "createLinkElement", -> expect(play.__get__ "createLinkElement").toBe require "./../dom/createLinkElement"
 			
 	describe "on calling", ->
-		map = scene = loadRig = valueOfObject = alert = document = preview = createPointElement = undefined
+		map = scene = loadRig = valueOfObject = alert = document = preview = createPointElement = createLinkElement = undefined
 		beforeEach ->
 			valueOfObject = jasmine.createSpy "valueOfObject"
 			play.__set__ "valueOfObject", valueOfObject
@@ -49,6 +50,9 @@ describe "play", ->
 			createPointElement = jasmine.createSpy "createPointElement"
 			play.__set__ "createPointElement", createPointElement
 			
+			createLinkElement = jasmine.createSpy "createLinkElement"
+			play.__set__ "createLinkElement", createLinkElement
+			
 			document = 
 				body:
 					setAttribute: jasmine.createSpy "setAttribute"
@@ -77,8 +81,11 @@ describe "play", ->
 			it "does not change the editor mode", ->
 				expect(document.body.setAttribute).not.toHaveBeenCalled()
 				
-			it "does not create any points for any elements", ->
+			it "does not create any elements for any points", ->
 				expect(createPointElement).not.toHaveBeenCalled()
+				
+			it "does not create any elements for any links", ->
+				expect(createLinkElement).not.toHaveBeenCalled()
 				
 		describe "when spawn points exist", ->
 			sceneInstance = rigInstance = undefined
@@ -103,6 +110,9 @@ describe "play", ->
 						pointA: "test point a"
 						pointB: "test point b"
 						pointC: "test point c"
+					links:
+						linkA: "test link a"
+						linkB: "test link b"
 					
 				loadRig.and.returnValue rigInstance
 			
@@ -139,3 +149,7 @@ describe "play", ->
 				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point a"
 				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point b"
 				expect(createPointElement).toHaveBeenCalledWith sceneInstance, "test point c"
+				
+			it "creates an element for every returned link", ->
+				expect(createLinkElement).toHaveBeenCalledWith sceneInstance, "test link a"
+				expect(createLinkElement).toHaveBeenCalledWith sceneInstance, "test link b"
