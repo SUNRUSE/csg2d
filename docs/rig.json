@@ -57,6 +57,10 @@
                     "material": {
                         "type": "string",
                         "minLength": 1
+                    },
+                    "sprite": {
+                        "type": "string",
+                        "minLength": 1
                     }
                 },
                 "required": ["location", "material"]
@@ -107,6 +111,10 @@
                             "minimum": 0,
                             "exclusiveMinimum": true
                         }
+                    },
+                    "sprite": {
+                        "type": "string",
+                        "minLength": 1
                     }
                 },
                 "required": ["from", "to", "material"]
