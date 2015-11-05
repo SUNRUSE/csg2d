@@ -129,34 +129,22 @@
 		"rightBodyUpright": {
 			"from": "collarbone",
 			"to": "rightWheel",
-			"material": "upright",
-			"controls": {
-				"leanRight": 1.15
-			}
+			"material": "upright"
 		},
 		"leftBodyUpright": {
 			"from": "collarbone",
 			"to": "leftWheel",
-			"material": "upright",
-			"controls": {
-				"leanLeft": 1.15
-			}
+			"material": "upright"
 		},
 		"leftArm": {
 			"from": "collarbone",
 			"to": "leftHand",
-			"material": "loose",
-			"controls": {
-				"leanLeft": 1.17
-			}
+			"material": "loose"
 		},
 		"rightArm": {
 			"from": "collarbone",
 			"to": "rightHand",
-			"material": "loose",
-			"controls": {
-				"leanRight": 1.17
-			}
+			"material": "loose"
 		},
 		"leftArmLower": {
 			"from": "leftHand",
